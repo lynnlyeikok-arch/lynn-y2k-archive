@@ -1,0 +1,125 @@
+html.is-intro,
+body.is-intro {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #241c18;
+}
+
+html.is-intro *,
+html.is-intro *::before,
+html.is-intro *::after {
+  box-sizing: border-box;
+}
+
+.intro-page,
+.intro-visual {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 0;
+  line-height: 0;
+  background: #241c18;
+}
+
+.intro-svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  vertical-align: top;
+  user-select: none;
+}
+
+.intro-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1024.5 / 58;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 0;
+  line-height: 0;
+  clip-path: inset(0 0 3px 0);
+}
+
+.intro-header-svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  opacity: 0.87;
+  pointer-events: none;
+  user-select: none;
+  vertical-align: top;
+  transform: translateY(calc(-269 / 576 * 100%));
+}
+
+.intro-header-nav {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.intro-header-nav a {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.intro-header-nav a:focus,
+.intro-header-nav a:focus-visible,
+.intro-header-nav a:hover,
+.intro-header-nav a:active {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: transparent;
+  text-decoration: none;
+}
+
+.intro-anchor {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

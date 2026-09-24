@@ -1,0 +1,284 @@
+.timeline-track {
+  height: 1550vh;
+  position: relative;
+  background: #210611;
+}
+
+.timeline-sticky {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  color: var(--tunnel-white);
+}
+
+.timeline-bg,
+.timeline-stars,
+.timeline-motion,
+.timeline-read-veil,
+.timeline-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.timeline-bg {
+  z-index: 0;
+  background-color: #210611;
+}
+
+.timeline-stars {
+  z-index: 1;
+  background-image: url('/images/star-tile.svg');
+  background-size: var(--star-tile-size) var(--star-tile-size);
+  background-repeat: repeat;
+  mix-blend-mode: screen;
+  opacity: 0.2;
+}
+
+.timeline-stars.is-static {
+  opacity: 0.22;
+  filter: none;
+}
+
+.timeline-motion {
+  z-index: 2;
+  overflow: hidden;
+}
+
+.timeline-tunnel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+.timeline-static-burst {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(217, 43, 117, 0.45), transparent 28%),
+    repeating-conic-gradient(from 0deg at 50% 48%, rgba(255, 157, 206, 0.18) 0deg 4deg, transparent 4deg 14deg);
+  opacity: 0.7;
+}
+
+.timeline-read-veil {
+  z-index: 4;
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(38, 7, 21, 0.82) 0%,
+    rgba(38, 7, 21, 0.5) 38%,
+    transparent 68%
+  );
+}
+
+.timeline-dots {
+  z-index: 5;
+}
+
+.timeline-text {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  filter: none;
+  isolation: isolate;
+}
+
+.timeline-instruction {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-pixel);
+  letter-spacing: 0.18em;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: var(--tunnel-pale);
+  text-shadow: 1px 1px #260715;
+}
+
+.timeline-year,
+.timeline-quote {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  margin: 0;
+  text-align: center;
+  color: var(--tunnel-white);
+  font-family: var(--font-pixel);
+  will-change: opacity, transform, filter;
+}
+
+.timeline-year {
+  font-size: clamp(72px, 11vw, 170px);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 18px rgba(255, 157, 206, 0.7),
+    3px 3px 0 #4a0b29,
+    0 0 42px rgba(255, 62, 165, 0.45);
+}
+
+.timeline-year-sparkle {
+  position: absolute;
+  top: -0.35em;
+  right: -0.55em;
+  font-size: 0.28em;
+  color: var(--tunnel-pale);
+  text-shadow: 0 0 12px rgba(255, 243, 250, 0.9);
+}
+
+.timeline-year.is-glow {
+  font-size: clamp(84px, 13vw, 196px);
+  text-shadow:
+    0 0 24px rgba(255, 243, 250, 0.9),
+    0 0 48px rgba(255, 62, 165, 0.75),
+    4px 4px 0 #4a0b29;
+}
+
+.timeline-quote {
+  width: min(92vw, 920px);
+}
+
+.timeline-quote::before {
+  content: '';
+  position: absolute;
+  inset: -0.9rem -0.7rem;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(38, 7, 21, 0.28), transparent 72%);
+}
+
+.timeline-quote-line {
+  margin: 0;
+  color: var(--tunnel-white);
+  text-shadow:
+    0 2px 0 #4a0b29,
+    0 0 18px rgba(255, 243, 250, 0.55),
+    0 0 28px rgba(255, 105, 180, 0.5);
+}
+
+.timeline-quote.is-medium .timeline-quote-line {
+  font-size: clamp(1.3rem, 4.2vw, 2.6rem);
+  letter-spacing: inherit;
+  line-height: 1.35;
+}
+
+.timeline-quote.is-hero .timeline-quote-line {
+  font-size: clamp(2.4rem, 8vw, 5.4rem);
+  letter-spacing: inherit;
+  line-height: 1.05;
+  text-shadow:
+    0 3px 0 #4a0b29,
+    0 0 28px rgba(255, 243, 250, 0.9),
+    0 0 48px rgba(255, 62, 165, 0.8);
+}
+
+.timeline-quote.is-question .timeline-quote-line {
+  font-size: clamp(1.35rem, 3.8vw, 2.5rem);
+  letter-spacing: inherit;
+  line-height: 1.45;
+}
+
+.timeline-quote.is-year-2026 .timeline-quote-line {
+  font-size: clamp(84px, 14vw, 200px);
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  text-shadow:
+    0 0 28px rgba(255, 243, 250, 0.95),
+    0 0 54px rgba(255, 62, 165, 0.8),
+    4px 4px 0 #4a0b29;
+}
+
+.timeline-quote-burst {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: var(--tunnel-light);
+  letter-spacing: 0.5em;
+  text-shadow: 0 0 16px rgba(255, 62, 165, 0.85);
+}
+
+@media (max-width: 800px) {
+  .timeline-year {
+    font-size: clamp(52px, 17vw, 100px);
+  }
+
+  .timeline-year.is-glow {
+    font-size: clamp(58px, 19vw, 112px);
+  }
+
+  .timeline-quote {
+    width: min(92vw, 36rem);
+  }
+
+  .timeline-quote.is-year-2026 .timeline-quote-line {
+    font-size: clamp(58px, 20vw, 120px);
+  }
+}
+
+.intro-close-button {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 1000;
+
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.intro-close-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 5px rgba(255, 255, 255, 0.45));
+}
+
+.intro-close-button:hover {
+  transform: scale(1.06);
+}
+
+.intro-close-button:active {
+  transform: scale(0.95);
+}
+
+.intro-close-button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .intro-close-button {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-year,
+  .timeline-quote,
+  .timeline-instruction,
+  .timeline-tunnel,
+  .wardrobe {
+    transition: none;
+    filter: none;
+  }
+}

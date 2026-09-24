@@ -1,0 +1,73 @@
+@property --polka-center {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffd2d2;
+}
+
+@property --polka-mid {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #eea3a5;
+}
+
+@property --polka-edge {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e08485;
+}
+
+@property --polka-dot {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(255, 214, 214, 0.5);
+}
+
+.polka-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --polka-center: #ffd2d2;
+  --polka-mid: #eea3a5;
+  --polka-edge: #e08485;
+  --polka-dot: rgba(255, 214, 214, 0.5);
+  background-color: var(--polka-edge);
+  background-image:
+    radial-gradient(ellipse 18% 100% at 50% 50%, var(--polka-center) 0%, transparent 72%),
+    radial-gradient(ellipse 46% 68% at 50% 48%, var(--polka-center) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 50%, var(--polka-center) 0%, var(--polka-mid) 40%, var(--polka-edge) 100%);
+  transition:
+    --polka-center 520ms cubic-bezier(0.65, 0, 0.35, 1),
+    --polka-mid 520ms cubic-bezier(0.65, 0, 0.35, 1),
+    --polka-edge 520ms cubic-bezier(0.65, 0, 0.35, 1),
+    --polka-dot 520ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.polka-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--polka-dot) 0 15px, transparent 16px),
+    radial-gradient(circle, var(--polka-dot) 0 15px, transparent 16px);
+  background-size: 72px 72px, 72px 72px;
+  background-position: 0 0, 36px 36px;
+  background-repeat: repeat;
+}
+
+.polka-background.is-dark {
+  --polka-center: #bd7675;
+  --polka-mid: #b36261;
+  --polka-edge: #b05c5b;
+  --polka-dot: rgba(201, 140, 139, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polka-background {
+    transition:
+      --polka-center 160ms linear,
+      --polka-mid 160ms linear,
+      --polka-edge 160ms linear,
+      --polka-dot 160ms linear;
+  }
+}

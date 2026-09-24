@@ -1,0 +1,38 @@
+:root {
+  --opening-pink: #e5456a;
+  --opening-star: #d2e446;
+  --opening-white: #ffffff;
+  --opening-text: #fff5fb;
+  --opening-welcome: #d2e446;
+  --opening-since: #9cecff;
+  --opening-sparkle: #9cecff;
+  --opening-shadow: #5a0a48;
+  --opening-button-top: #ffe7f4;
+  --opening-button-mid: #ff4ec8;
+  --opening-button-bottom: #ff2a9a;
+  --opening-button-inset: rgba(170, 20, 90, 0.35);
+  --opening-button-drop: rgba(90, 10, 72, 0.28);
+  --opening-highlight: rgba(255, 255, 255, 0.55);
+  --opening-focus: #9cecff;
+  --canvas-width: 1366px;
+  --canvas-height: 765px;
+  --star-tile-size: 56px;
+  --font-pixel: 'DotGothic16', ui-monospace, monospace;
+  --font-jp: 'M PLUS Rounded 1c', sans-serif;
+  --arrow-deep: #b52e66;
+  --arrow-hot: #f044a7;
+  --arrow-main: #ff69b4;
+  --arrow-light: #ffb6d9;
+  --arrow-pale: #ffe1f0;
+  --arrow-center: #fff5fa;
+  --tunnel-bg: #260715;
+  --tunnel-burgundy: #4a0b29;
+  --tunnel-rose: #74133f;
+  --tunnel-main: #d92b75;
+  --tunnel-hot: #ff3ea5;
+  --tunnel-light: #ff9dce;
+  --tunnel-pale: #ffd7ea;
+  --tunnel-white: #fff3fa;
+  --wardrobe-pink: #ff8eb8;
+  --wardrobe-dot: #ffe7f4;
+}

@@ -1,0 +1,11 @@
+node_modules
+.output
+.vinxi
+.tanstack
+dist
+*.local
+.DS_Store
+.vercel
+.env*
+.cursor
+public/assets/moodboard/MOODBOARD.pdf

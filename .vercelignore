@@ -1,0 +1,12 @@
+node_modules
+.output
+.vinxi
+.tanstack
+dist
+*.local
+.DS_Store
+.cursor
+.git
+references
+**/*.pdf
+agent-transcripts

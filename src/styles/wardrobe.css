@@ -1,0 +1,228 @@
+@font-face {
+  font-family: 'Bryndan Write';
+  src: url('/fonts/BryndanWrite.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.wardrobe {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100%;
+  background: transparent;
+}
+
+.wardrobe-shell {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.wardrobe-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1366px;
+  height: 765px;
+  overflow: hidden;
+  transform-origin: top left;
+  background: transparent;
+}
+
+.wardrobe-title {
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 1366px;
+  margin: 0;
+  font-family: 'Bryndan Write', cursive;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 54px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #2b2424;
+}
+
+.wardrobe-row {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wardrobe-swipe {
+  position: absolute;
+  left: 64px;
+  width: 1238px;
+  z-index: 7;
+  pointer-events: auto;
+  touch-action: pan-y;
+  outline: none;
+}
+
+.wardrobe-row.is-tops .wardrobe-swipe {
+  top: 66px;
+  height: 250px;
+}
+
+.wardrobe-row.is-bottoms .wardrobe-swipe {
+  top: 316px;
+  height: 318px;
+}
+
+.wardrobe-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.wardrobe-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+}
+
+.wardrobe-row.is-bottoms .wardrobe-item img {
+  object-position: top center;
+}
+
+.wardrobe-arrow,
+.wardrobe-done {
+  font-family: 'Bryndan Write', cursive;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.wardrobe-arrow {
+  position: absolute;
+  z-index: 8;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #2a2424;
+}
+
+.wardrobe-arrow.is-top-prev {
+  left: 8px;
+  top: 248px;
+}
+
+.wardrobe-arrow.is-top-next {
+  left: 1302px;
+  top: 248px;
+}
+
+.wardrobe-arrow.is-bottom-prev {
+  left: 8px;
+  top: 416px;
+}
+
+.wardrobe-arrow.is-bottom-next {
+  left: 1302px;
+  top: 416px;
+}
+
+.wardrobe-chevron {
+  width: 25px;
+  height: 36px;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.wardrobe-chevron path {
+  fill: none;
+  stroke: #2a2424;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wardrobe-done {
+  position: absolute;
+  left: 1195px;
+  top: 657px;
+  z-index: 9;
+  width: 121px;
+  height: 63px;
+  padding: 0 0 4px;
+  border: 0;
+  border-radius: 999px;
+  background: #232020;
+  color: #ffffff;
+  font-size: 33px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.wardrobe-saved {
+  position: absolute;
+  left: 1168px;
+  top: 628px;
+  z-index: 9;
+  width: 176px;
+  margin: 0;
+  font-family: 'Bryndan Write', cursive;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  color: #2b2424;
+}
+
+.wardrobe-arrow:focus-visible,
+.wardrobe-done:focus-visible,
+.wardrobe-swipe:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.wardrobe-arrow:hover:not(:disabled) .wardrobe-chevron,
+.wardrobe-done:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.wardrobe-arrow:disabled,
+.wardrobe-done:disabled {
+  cursor: default;
+  filter: none;
+}
+
+.wardrobe.is-exiting .wardrobe-title,
+.wardrobe.is-exiting .wardrobe-row,
+.wardrobe.is-exiting .wardrobe-done {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 520ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wardrobe,
+  .wardrobe-item,
+  .wardrobe-title,
+  .wardrobe-done,
+  .wardrobe-arrow {
+    transition: none;
+  }
+
+  .wardrobe.is-exiting .wardrobe-title,
+  .wardrobe.is-exiting .wardrobe-row,
+  .wardrobe.is-exiting .wardrobe-done {
+    transition: opacity 160ms linear;
+  }
+}

@@ -1,0 +1,41 @@
+@import 'tailwindcss' source('../');
+@import './design-tokens.css';
+@import './opening-screen.css';
+@import './timeline.css';
+@import './polka-background.css';
+@import './wardrobe.css';
+@import './size-journey.css';
+@import './intro.css';
+@import './moodboards.css';
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow: hidden;
+}
+
+html.is-timeline {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #260715;
+  scrollbar-width: none;
+}
+
+html.is-timeline::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body {
+  margin: 0;
+  overflow: visible;
+  background: var(--opening-pink);
+  color: var(--opening-text);
+}
