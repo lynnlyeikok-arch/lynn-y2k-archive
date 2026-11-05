@@ -1,5 +1,11 @@
 import { type CSSProperties, type MouseEvent } from 'react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
+import { AboutMenu } from './AboutMenu'
+import {
+  CaseStudiesMenu,
+  PrimaryResearchMenu,
+  SecondaryResearchMenu,
+} from './ResearchMenus'
 
 const VIEWBOX_WIDTH = 1024.5
 const BAR_Y = 269
@@ -58,6 +64,7 @@ export function IntroHeader() {
   }
 
   return (
+    <>
     <header className="intro-header">
       <img
         className="intro-header-svg"
@@ -67,7 +74,10 @@ export function IntroHeader() {
       />
       <nav className="intro-header-nav" aria-label="Site">
         {NAV.map((item) =>
-          item.id === 'moodboards' ? (
+          item.id === 'about' ||
+          item.id === 'primary-research' ||
+          item.id === 'secondary-research' ||
+          item.id === 'case-studies' ? null : item.id === 'moodboards' ? (
             <Link
               key={item.id}
               to="/moodboards"
@@ -89,5 +99,14 @@ export function IntroHeader() {
         )}
       </nav>
     </header>
+    {pathname === '/intro' ? null : (
+      <>
+        <PrimaryResearchMenu className="intro-header-research" />
+        <SecondaryResearchMenu className="intro-header-secondary" />
+        <CaseStudiesMenu className="intro-header-cases" />
+        <AboutMenu className="intro-header-about" />
+      </>
+    )}
+    </>
   )
 }

@@ -7,7 +7,7 @@ body.is-intro {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #241c18;
+  background: #f4bbc9;
 }
 
 html.is-intro *,
@@ -19,6 +19,7 @@ html.is-intro *::after {
 .intro-page,
 .intro-visual {
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   max-width: none;
   margin: 0;
@@ -27,7 +28,333 @@ html.is-intro *::after {
   outline: none;
   font-size: 0;
   line-height: 0;
-  background: #241c18;
+  background: #f4bbc9;
+}
+
+html.is-intro .intro-header {
+  position: absolute;
+  pointer-events: none;
+}
+
+html.is-intro .intro-header-nav a {
+  pointer-events: auto;
+}
+
+html.is-intro .intro-header-nav a[aria-label='ABOUT'],
+html.is-intro .intro-header-nav a[aria-label='SECONDARY RESEARCH'],
+html.is-intro .intro-header-nav a[aria-label='CASE STUDIES'] {
+  pointer-events: none;
+}
+
+.intro-moodboard-hotspot {
+  position: absolute;
+  z-index: 2;
+  left: 71.16%;
+  top: 0.97%;
+  width: 10.93%;
+  height: 3.59%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.intro-about {
+  position: absolute;
+  z-index: 10000;
+  left: 85.51%;
+  top: 0.97%;
+  width: 5.86%;
+  height: 3.59%;
+}
+
+.intro-header-about {
+  position: fixed;
+  left: 85.94241093%;
+  top: calc(100vw * 58 / 1024.5 * 0.482241379);
+  width: 5.056124939%;
+  height: calc(100vw * 58 / 1024.5 * 0.269482759);
+}
+
+.intro-about-hit {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.intro-about-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  z-index: 1;
+  width: max-content;
+  max-width: 70vw;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #f4bbc9;
+  border: 2px solid #2a1c22;
+  box-shadow: 3px 3px 0 #2a1c22;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity 160ms ease,
+    visibility 160ms ease,
+    transform 160ms ease;
+}
+
+.intro-about:hover .intro-about-menu,
+.intro-about.is-open .intro-about-menu,
+.intro-research:hover > .intro-research-menu,
+.intro-research.is-open > .intro-research-menu,
+.intro-secondary:hover > .intro-secondary-menu,
+.intro-secondary.is-open > .intro-secondary-menu,
+.intro-cases:hover > .intro-cases-menu,
+.intro-cases.is-open > .intro-cases-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.intro-about-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  right: 0;
+  left: 0;
+  height: 12px;
+}
+
+.intro-about-menu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intro-about-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 12px;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  color: #2a1c22;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.intro-about-menu a::before {
+  content: '•';
+  flex: 0 0 auto;
+}
+
+.intro-about-menu a:hover,
+.intro-about-menu a:focus-visible,
+.intro-interview-trigger:hover,
+.intro-interview-trigger:focus-visible {
+  background: rgba(255, 255, 255, 0.55);
+  outline: none;
+}
+
+.intro-research {
+  position: absolute;
+  z-index: 10000;
+  left: 17.62%;
+  top: 0.97%;
+  width: 14.62%;
+  height: 3.59%;
+}
+
+.intro-header-research {
+  position: fixed;
+  left: 17.86237189%;
+  top: calc(100vw * 58 / 1024.5 * 0.482241379);
+  width: 14.31234749%;
+  height: calc(100vw * 58 / 1024.5 * 0.269482759);
+}
+
+.intro-research-menu {
+  left: 0;
+  right: auto;
+}
+
+.intro-secondary {
+  position: absolute;
+  z-index: 10000;
+  left: 36.21%;
+  top: 0.97%;
+  width: 16.81%;
+  height: 3.59%;
+}
+
+.intro-header-secondary {
+  position: fixed;
+  left: 36.42069302%;
+  top: calc(100vw * 58 / 1024.5 * 0.482241379);
+  width: 16.51634944%;
+  height: calc(100vw * 58 / 1024.5 * 0.269482759);
+}
+
+.intro-secondary::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: calc(100% - 4px);
+  left: 0;
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+}
+
+.intro-secondary:hover::before,
+.intro-secondary.is-open::before {
+  pointer-events: auto;
+}
+
+.intro-secondary-menu {
+  left: 0;
+  right: auto;
+  max-height: calc(100dvh - 4.75rem);
+  overflow-y: auto;
+}
+
+.intro-secondary-menu::before {
+  content: none;
+}
+
+.intro-cases {
+  position: absolute;
+  z-index: 10000;
+  left: 57%;
+  top: 0.97%;
+  width: 10.37%;
+  height: 3.59%;
+}
+
+.intro-header-cases {
+  position: fixed;
+  left: 57.18984871%;
+  top: calc(100vw * 58 / 1024.5 * 0.482241379);
+  width: 10.12884334%;
+  height: calc(100vw * 58 / 1024.5 * 0.269482759);
+}
+
+.intro-cases::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: calc(100% - 4px);
+  left: 0;
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+}
+
+.intro-cases:hover::before,
+.intro-cases.is-open::before {
+  pointer-events: auto;
+}
+
+.intro-cases-menu {
+  left: 0;
+  right: auto;
+  width: max-content;
+  max-width: calc(43vw - 12px);
+  max-height: calc(100dvh - 4.75rem);
+  overflow-y: auto;
+}
+
+.intro-cases-menu::before {
+  content: none;
+}
+
+.intro-cases-menu a {
+  white-space: normal;
+}
+
+.intro-interview-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 6px 12px;
+  background: transparent;
+  border: 0;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  color: #2a1c22;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.intro-interview-trigger::before {
+  content: '•';
+  flex: 0 0 auto;
+}
+
+.intro-interview-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 180ms ease,
+    opacity 160ms ease;
+}
+
+.intro-interview:hover > .intro-interview-menu,
+.intro-interview.is-open > .intro-interview-menu {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.intro-interview-menu > ul {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.intro-interview-menu a {
+  padding-left: 28px;
+}
+
+@media (max-width: 700px) {
+  .intro-about-menu a,
+  .intro-interview-trigger {
+    gap: 6px;
+    padding: 7px 10px;
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .intro-interview-menu a {
+    padding-left: 22px;
+  }
+}
+
+html.is-intro .intro-header-svg {
+  opacity: 0;
 }
 
 .intro-svg {

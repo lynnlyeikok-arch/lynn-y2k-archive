@@ -10,18 +10,137 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudy1RouteImport } from './routes/case-study-1'
+import { Route as CaseStudy2RouteImport } from './routes/case-study-2'
+import { Route as CaseStudy3RouteImport } from './routes/case-study-3'
+import { Route as Chapter1RouteImport } from './routes/chapter-1'
+import { Route as Chapter2RouteImport } from './routes/chapter-2'
+import { Route as Chapter3RouteImport } from './routes/chapter-3'
+import { Route as Chapter4RouteImport } from './routes/chapter-4'
+import { Route as Chapter5RouteImport } from './routes/chapter-5'
+import { Route as Chapter6RouteImport } from './routes/chapter-6'
+import { Route as Chapter7RouteImport } from './routes/chapter-7'
+import { Route as Chapter8RouteImport } from './routes/chapter-8'
 import { Route as ContinueRouteImport } from './routes/continue'
+import { Route as CreatorNoteRouteImport } from './routes/creator-note'
+import { Route as DigitalMagazineRouteImport } from './routes/digital-magazine'
+import { Route as InstagramAccountRouteImport } from './routes/instagram-account'
+import { Route as Interview1RouteImport } from './routes/interview-1'
+import { Route as Interview2RouteImport } from './routes/interview-2'
+import { Route as Interview3RouteImport } from './routes/interview-3'
+import { Route as Interview4RouteImport } from './routes/interview-4'
+import { Route as Interview5RouteImport } from './routes/interview-5'
 import { Route as IntroRouteImport } from './routes/intro'
 import { Route as MoodboardsRouteImport } from './routes/moodboards'
+import { Route as PersonalInformationRouteImport } from './routes/personal-information'
+import { Route as ProjectReflectionRouteImport } from './routes/project-reflection'
+import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as SurveyFormResultRouteImport } from './routes/survey-form-result'
+import { Route as WeeklyBlogRouteImport } from './routes/weekly-blog'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudy1Route = CaseStudy1RouteImport.update({
+  id: '/case-study-1',
+  path: '/case-study-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudy2Route = CaseStudy2RouteImport.update({
+  id: '/case-study-2',
+  path: '/case-study-2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudy3Route = CaseStudy3RouteImport.update({
+  id: '/case-study-3',
+  path: '/case-study-3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter1Route = Chapter1RouteImport.update({
+  id: '/chapter-1',
+  path: '/chapter-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter2Route = Chapter2RouteImport.update({
+  id: '/chapter-2',
+  path: '/chapter-2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter3Route = Chapter3RouteImport.update({
+  id: '/chapter-3',
+  path: '/chapter-3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter4Route = Chapter4RouteImport.update({
+  id: '/chapter-4',
+  path: '/chapter-4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter5Route = Chapter5RouteImport.update({
+  id: '/chapter-5',
+  path: '/chapter-5',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter6Route = Chapter6RouteImport.update({
+  id: '/chapter-6',
+  path: '/chapter-6',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter7Route = Chapter7RouteImport.update({
+  id: '/chapter-7',
+  path: '/chapter-7',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Chapter8Route = Chapter8RouteImport.update({
+  id: '/chapter-8',
+  path: '/chapter-8',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContinueRoute = ContinueRouteImport.update({
   id: '/continue',
   path: '/continue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorNoteRoute = CreatorNoteRouteImport.update({
+  id: '/creator-note',
+  path: '/creator-note',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DigitalMagazineRoute = DigitalMagazineRouteImport.update({
+  id: '/digital-magazine',
+  path: '/digital-magazine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstagramAccountRoute = InstagramAccountRouteImport.update({
+  id: '/instagram-account',
+  path: '/instagram-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Interview1Route = Interview1RouteImport.update({
+  id: '/interview-1',
+  path: '/interview-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Interview2Route = Interview2RouteImport.update({
+  id: '/interview-2',
+  path: '/interview-2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Interview3Route = Interview3RouteImport.update({
+  id: '/interview-3',
+  path: '/interview-3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Interview4Route = Interview4RouteImport.update({
+  id: '/interview-4',
+  path: '/interview-4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Interview5Route = Interview5RouteImport.update({
+  id: '/interview-5',
+  path: '/interview-5',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntroRoute = IntroRouteImport.update({
@@ -34,39 +153,245 @@ const MoodboardsRoute = MoodboardsRouteImport.update({
   path: '/moodboards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PersonalInformationRoute = PersonalInformationRouteImport.update({
+  id: '/personal-information',
+  path: '/personal-information',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectReflectionRoute = ProjectReflectionRouteImport.update({
+  id: '/project-reflection',
+  path: '/project-reflection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurveyFormResultRoute = SurveyFormResultRouteImport.update({
+  id: '/survey-form-result',
+  path: '/survey-form-result',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyBlogRoute = WeeklyBlogRouteImport.update({
+  id: '/weekly-blog',
+  path: '/weekly-blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/case-study-1': typeof CaseStudy1Route
+  '/case-study-2': typeof CaseStudy2Route
+  '/case-study-3': typeof CaseStudy3Route
+  '/chapter-1': typeof Chapter1Route
+  '/chapter-2': typeof Chapter2Route
+  '/chapter-3': typeof Chapter3Route
+  '/chapter-4': typeof Chapter4Route
+  '/chapter-5': typeof Chapter5Route
+  '/chapter-6': typeof Chapter6Route
+  '/chapter-7': typeof Chapter7Route
+  '/chapter-8': typeof Chapter8Route
   '/continue': typeof ContinueRoute
+  '/creator-note': typeof CreatorNoteRoute
+  '/digital-magazine': typeof DigitalMagazineRoute
+  '/instagram-account': typeof InstagramAccountRoute
+  '/interview-1': typeof Interview1Route
+  '/interview-2': typeof Interview2Route
+  '/interview-3': typeof Interview3Route
+  '/interview-4': typeof Interview4Route
+  '/interview-5': typeof Interview5Route
   '/intro': typeof IntroRoute
   '/moodboards': typeof MoodboardsRoute
+  '/personal-information': typeof PersonalInformationRoute
+  '/project-reflection': typeof ProjectReflectionRoute
+  '/references': typeof ReferencesRoute
+  '/survey-form-result': typeof SurveyFormResultRoute
+  '/weekly-blog': typeof WeeklyBlogRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/case-study-1': typeof CaseStudy1Route
+  '/case-study-2': typeof CaseStudy2Route
+  '/case-study-3': typeof CaseStudy3Route
+  '/chapter-1': typeof Chapter1Route
+  '/chapter-2': typeof Chapter2Route
+  '/chapter-3': typeof Chapter3Route
+  '/chapter-4': typeof Chapter4Route
+  '/chapter-5': typeof Chapter5Route
+  '/chapter-6': typeof Chapter6Route
+  '/chapter-7': typeof Chapter7Route
+  '/chapter-8': typeof Chapter8Route
   '/continue': typeof ContinueRoute
+  '/creator-note': typeof CreatorNoteRoute
+  '/digital-magazine': typeof DigitalMagazineRoute
+  '/instagram-account': typeof InstagramAccountRoute
+  '/interview-1': typeof Interview1Route
+  '/interview-2': typeof Interview2Route
+  '/interview-3': typeof Interview3Route
+  '/interview-4': typeof Interview4Route
+  '/interview-5': typeof Interview5Route
   '/intro': typeof IntroRoute
   '/moodboards': typeof MoodboardsRoute
+  '/personal-information': typeof PersonalInformationRoute
+  '/project-reflection': typeof ProjectReflectionRoute
+  '/references': typeof ReferencesRoute
+  '/survey-form-result': typeof SurveyFormResultRoute
+  '/weekly-blog': typeof WeeklyBlogRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/case-study-1': typeof CaseStudy1Route
+  '/case-study-2': typeof CaseStudy2Route
+  '/case-study-3': typeof CaseStudy3Route
+  '/chapter-1': typeof Chapter1Route
+  '/chapter-2': typeof Chapter2Route
+  '/chapter-3': typeof Chapter3Route
+  '/chapter-4': typeof Chapter4Route
+  '/chapter-5': typeof Chapter5Route
+  '/chapter-6': typeof Chapter6Route
+  '/chapter-7': typeof Chapter7Route
+  '/chapter-8': typeof Chapter8Route
   '/continue': typeof ContinueRoute
+  '/creator-note': typeof CreatorNoteRoute
+  '/digital-magazine': typeof DigitalMagazineRoute
+  '/instagram-account': typeof InstagramAccountRoute
+  '/interview-1': typeof Interview1Route
+  '/interview-2': typeof Interview2Route
+  '/interview-3': typeof Interview3Route
+  '/interview-4': typeof Interview4Route
+  '/interview-5': typeof Interview5Route
   '/intro': typeof IntroRoute
   '/moodboards': typeof MoodboardsRoute
+  '/personal-information': typeof PersonalInformationRoute
+  '/project-reflection': typeof ProjectReflectionRoute
+  '/references': typeof ReferencesRoute
+  '/survey-form-result': typeof SurveyFormResultRoute
+  '/weekly-blog': typeof WeeklyBlogRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/continue' | '/intro' | '/moodboards'
+  fullPaths:
+    | '/'
+    | '/case-study-1'
+    | '/case-study-2'
+    | '/case-study-3'
+    | '/chapter-1'
+    | '/chapter-2'
+    | '/chapter-3'
+    | '/chapter-4'
+    | '/chapter-5'
+    | '/chapter-6'
+    | '/chapter-7'
+    | '/chapter-8'
+    | '/continue'
+    | '/creator-note'
+    | '/digital-magazine'
+    | '/instagram-account'
+    | '/interview-1'
+    | '/interview-2'
+    | '/interview-3'
+    | '/interview-4'
+    | '/interview-5'
+    | '/intro'
+    | '/moodboards'
+    | '/personal-information'
+    | '/project-reflection'
+    | '/references'
+    | '/survey-form-result'
+    | '/weekly-blog'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/continue' | '/intro' | '/moodboards'
-  id: '__root__' | '/' | '/continue' | '/intro' | '/moodboards'
+  to:
+    | '/'
+    | '/case-study-1'
+    | '/case-study-2'
+    | '/case-study-3'
+    | '/chapter-1'
+    | '/chapter-2'
+    | '/chapter-3'
+    | '/chapter-4'
+    | '/chapter-5'
+    | '/chapter-6'
+    | '/chapter-7'
+    | '/chapter-8'
+    | '/continue'
+    | '/creator-note'
+    | '/digital-magazine'
+    | '/instagram-account'
+    | '/interview-1'
+    | '/interview-2'
+    | '/interview-3'
+    | '/interview-4'
+    | '/interview-5'
+    | '/intro'
+    | '/moodboards'
+    | '/personal-information'
+    | '/project-reflection'
+    | '/references'
+    | '/survey-form-result'
+    | '/weekly-blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/case-study-1'
+    | '/case-study-2'
+    | '/case-study-3'
+    | '/chapter-1'
+    | '/chapter-2'
+    | '/chapter-3'
+    | '/chapter-4'
+    | '/chapter-5'
+    | '/chapter-6'
+    | '/chapter-7'
+    | '/chapter-8'
+    | '/continue'
+    | '/creator-note'
+    | '/digital-magazine'
+    | '/instagram-account'
+    | '/interview-1'
+    | '/interview-2'
+    | '/interview-3'
+    | '/interview-4'
+    | '/interview-5'
+    | '/intro'
+    | '/moodboards'
+    | '/personal-information'
+    | '/project-reflection'
+    | '/references'
+    | '/survey-form-result'
+    | '/weekly-blog'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaseStudy1Route: typeof CaseStudy1Route
+  CaseStudy2Route: typeof CaseStudy2Route
+  CaseStudy3Route: typeof CaseStudy3Route
+  Chapter1Route: typeof Chapter1Route
+  Chapter2Route: typeof Chapter2Route
+  Chapter3Route: typeof Chapter3Route
+  Chapter4Route: typeof Chapter4Route
+  Chapter5Route: typeof Chapter5Route
+  Chapter6Route: typeof Chapter6Route
+  Chapter7Route: typeof Chapter7Route
+  Chapter8Route: typeof Chapter8Route
   ContinueRoute: typeof ContinueRoute
+  CreatorNoteRoute: typeof CreatorNoteRoute
+  DigitalMagazineRoute: typeof DigitalMagazineRoute
+  InstagramAccountRoute: typeof InstagramAccountRoute
+  Interview1Route: typeof Interview1Route
+  Interview2Route: typeof Interview2Route
+  Interview3Route: typeof Interview3Route
+  Interview4Route: typeof Interview4Route
+  Interview5Route: typeof Interview5Route
   IntroRoute: typeof IntroRoute
   MoodboardsRoute: typeof MoodboardsRoute
+  PersonalInformationRoute: typeof PersonalInformationRoute
+  ProjectReflectionRoute: typeof ProjectReflectionRoute
+  ReferencesRoute: typeof ReferencesRoute
+  SurveyFormResultRoute: typeof SurveyFormResultRoute
+  WeeklyBlogRoute: typeof WeeklyBlogRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -78,11 +403,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-study-1': {
+      id: '/case-study-1'
+      path: '/case-study-1'
+      fullPath: '/case-study-1'
+      preLoaderRoute: typeof CaseStudy1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-study-2': {
+      id: '/case-study-2'
+      path: '/case-study-2'
+      fullPath: '/case-study-2'
+      preLoaderRoute: typeof CaseStudy2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-study-3': {
+      id: '/case-study-3'
+      path: '/case-study-3'
+      fullPath: '/case-study-3'
+      preLoaderRoute: typeof CaseStudy3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-1': {
+      id: '/chapter-1'
+      path: '/chapter-1'
+      fullPath: '/chapter-1'
+      preLoaderRoute: typeof Chapter1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-2': {
+      id: '/chapter-2'
+      path: '/chapter-2'
+      fullPath: '/chapter-2'
+      preLoaderRoute: typeof Chapter2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-3': {
+      id: '/chapter-3'
+      path: '/chapter-3'
+      fullPath: '/chapter-3'
+      preLoaderRoute: typeof Chapter3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-4': {
+      id: '/chapter-4'
+      path: '/chapter-4'
+      fullPath: '/chapter-4'
+      preLoaderRoute: typeof Chapter4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-5': {
+      id: '/chapter-5'
+      path: '/chapter-5'
+      fullPath: '/chapter-5'
+      preLoaderRoute: typeof Chapter5RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-6': {
+      id: '/chapter-6'
+      path: '/chapter-6'
+      fullPath: '/chapter-6'
+      preLoaderRoute: typeof Chapter6RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-7': {
+      id: '/chapter-7'
+      path: '/chapter-7'
+      fullPath: '/chapter-7'
+      preLoaderRoute: typeof Chapter7RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chapter-8': {
+      id: '/chapter-8'
+      path: '/chapter-8'
+      fullPath: '/chapter-8'
+      preLoaderRoute: typeof Chapter8RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/continue': {
       id: '/continue'
       path: '/continue'
       fullPath: '/continue'
       preLoaderRoute: typeof ContinueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creator-note': {
+      id: '/creator-note'
+      path: '/creator-note'
+      fullPath: '/creator-note'
+      preLoaderRoute: typeof CreatorNoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-magazine': {
+      id: '/digital-magazine'
+      path: '/digital-magazine'
+      fullPath: '/digital-magazine'
+      preLoaderRoute: typeof DigitalMagazineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instagram-account': {
+      id: '/instagram-account'
+      path: '/instagram-account'
+      fullPath: '/instagram-account'
+      preLoaderRoute: typeof InstagramAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interview-1': {
+      id: '/interview-1'
+      path: '/interview-1'
+      fullPath: '/interview-1'
+      preLoaderRoute: typeof Interview1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interview-2': {
+      id: '/interview-2'
+      path: '/interview-2'
+      fullPath: '/interview-2'
+      preLoaderRoute: typeof Interview2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interview-3': {
+      id: '/interview-3'
+      path: '/interview-3'
+      fullPath: '/interview-3'
+      preLoaderRoute: typeof Interview3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interview-4': {
+      id: '/interview-4'
+      path: '/interview-4'
+      fullPath: '/interview-4'
+      preLoaderRoute: typeof Interview4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/interview-5': {
+      id: '/interview-5'
+      path: '/interview-5'
+      fullPath: '/interview-5'
+      preLoaderRoute: typeof Interview5RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intro': {
@@ -99,14 +557,73 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoodboardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/personal-information': {
+      id: '/personal-information'
+      path: '/personal-information'
+      fullPath: '/personal-information'
+      preLoaderRoute: typeof PersonalInformationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project-reflection': {
+      id: '/project-reflection'
+      path: '/project-reflection'
+      fullPath: '/project-reflection'
+      preLoaderRoute: typeof ProjectReflectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/survey-form-result': {
+      id: '/survey-form-result'
+      path: '/survey-form-result'
+      fullPath: '/survey-form-result'
+      preLoaderRoute: typeof SurveyFormResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-blog': {
+      id: '/weekly-blog'
+      path: '/weekly-blog'
+      fullPath: '/weekly-blog'
+      preLoaderRoute: typeof WeeklyBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaseStudy1Route: CaseStudy1Route,
+  CaseStudy2Route: CaseStudy2Route,
+  CaseStudy3Route: CaseStudy3Route,
+  Chapter1Route: Chapter1Route,
+  Chapter2Route: Chapter2Route,
+  Chapter3Route: Chapter3Route,
+  Chapter4Route: Chapter4Route,
+  Chapter5Route: Chapter5Route,
+  Chapter6Route: Chapter6Route,
+  Chapter7Route: Chapter7Route,
+  Chapter8Route: Chapter8Route,
   ContinueRoute: ContinueRoute,
+  CreatorNoteRoute: CreatorNoteRoute,
+  DigitalMagazineRoute: DigitalMagazineRoute,
+  InstagramAccountRoute: InstagramAccountRoute,
+  Interview1Route: Interview1Route,
+  Interview2Route: Interview2Route,
+  Interview3Route: Interview3Route,
+  Interview4Route: Interview4Route,
+  Interview5Route: Interview5Route,
   IntroRoute: IntroRoute,
   MoodboardsRoute: MoodboardsRoute,
+  PersonalInformationRoute: PersonalInformationRoute,
+  ProjectReflectionRoute: ProjectReflectionRoute,
+  ReferencesRoute: ReferencesRoute,
+  SurveyFormResultRoute: SurveyFormResultRoute,
+  WeeklyBlogRoute: WeeklyBlogRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

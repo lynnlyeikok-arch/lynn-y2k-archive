@@ -1,6 +1,12 @@
 import { useLayoutEffect } from 'react'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
+import { AboutMenu } from './AboutMenu'
 import { IntroHeader } from './IntroHeader'
+import {
+  CaseStudiesMenu,
+  PrimaryResearchMenu,
+  SecondaryResearchMenu,
+} from './ResearchMenus'
 
 export function IntroPage() {
   const navigate = useNavigate()
@@ -31,16 +37,27 @@ export function IntroPage() {
   }, [navigate])
 
   return (
-    <main className="intro-page">
+    <main className="intro-page" id="intro">
       <IntroHeader />
 
       <div className="intro-visual">
         <img
           className="intro-svg"
-          src="/images/intro/INTRO.svg"
-          alt="When one size becomes one standard"
+          src="/images/intro-3.svg"
+          alt="One size does not fit all"
+          width={1024.5}
+          height={1335.75}
           draggable={false}
         />
+        <Link
+          to="/moodboards"
+          className="intro-moodboard-hotspot"
+          aria-label="MOODBOARDS"
+        />
+        <PrimaryResearchMenu />
+        <SecondaryResearchMenu />
+        <CaseStudiesMenu />
+        <AboutMenu />
       </div>
 
       <div className="intro-anchor" id="primary-research" />

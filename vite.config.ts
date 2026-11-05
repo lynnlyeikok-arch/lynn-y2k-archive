@@ -8,7 +8,15 @@ export default defineConfig({
   server: {
     port: 3000,
     watch: {
-      ignored: ['**/references/**', '**/public/assets/moodboard/**/*.pdf'],
+      ignored: [
+        '**/references/**',
+        '**/public/assets/moodboard/**/*.pdf',
+        '**/public/images/case-study/**',
+        '**/public/images/chapters/**',
+        '**/public/images/primary/**',
+        '**/public/images/intro-3.svg',
+        '**/public/images/cork-parts/**',
+      ],
     },
   },
   plugins: [
