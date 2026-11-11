@@ -1,0 +1,66 @@
+html.is-creator-note,
+body.is-creator-note {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--opening-pink);
+}
+
+.creator-note-page {
+  position: relative;
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 72px 40px 40px;
+  overflow-x: hidden;
+}
+
+.creator-note-back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  color: var(--opening-text);
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.creator-note-back:hover,
+.creator-note-back:focus-visible {
+  background: rgba(255, 255, 255, 0.55);
+  color: #2a1c22;
+  outline: none;
+}
+
+.creator-note-art {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(1040px, calc(100vw - 80px));
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  aspect-ratio: 1099.5 / 823.5;
+}
+
+@media (max-width: 700px) {
+  .creator-note-page {
+    padding: 64px 16px 24px;
+  }
+
+  .creator-note-back {
+    top: 16px;
+    left: 16px;
+  }
+
+  .creator-note-art {
+    width: calc(100vw - 32px);
+  }
+}

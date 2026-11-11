@@ -1,0 +1,92 @@
+html.is-digital-magazine,
+body.is-digital-magazine {
+  overflow: hidden;
+  height: 100%;
+}
+
+.digital-magazine-page {
+  --moodboard-header-height: calc(100vw * 58 / 1024.5);
+  --magazine-controls-space: 72px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.digital-magazine-page .moodboard-book-stage {
+  padding: 8px 16px var(--magazine-controls-space);
+  box-sizing: border-box;
+}
+
+.digital-magazine-page .moodboard-book-wrapper {
+  width: min(
+    100%,
+    calc((100dvh - var(--moodboard-header-height) - var(--magazine-controls-space) - 16px) * 420 / 297)
+  );
+  max-width: 100%;
+  height: auto;
+}
+
+.digital-magazine-page .moodboard-book-host {
+  width: 100%;
+  aspect-ratio: 420 / 297;
+}
+
+.digital-magazine-back {
+  position: fixed;
+  top: calc(var(--moodboard-header-height) + 8px);
+  left: 16px;
+  z-index: 220;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2a1c22;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.digital-magazine-back:hover,
+.digital-magazine-back:focus-visible {
+  background: rgba(255, 255, 255, 0.55);
+  outline: none;
+}
+
+@media (max-width: 767px) {
+  .digital-magazine-page {
+    --magazine-controls-space: 92px;
+  }
+
+  .digital-magazine-page .moodboard-book-wrapper {
+    width: min(
+      calc(100vw - 20px),
+      calc((100dvh - var(--moodboard-header-height) - var(--magazine-controls-space) - 12px) * 420 / 297)
+    );
+  }
+
+  .digital-magazine-page .moodboard-book-host {
+    width: 100%;
+    aspect-ratio: 420 / 297;
+  }
+
+  .digital-magazine-page .moodboard-book-position,
+  .digital-magazine-page .moodboard-book-position.is-front-cover,
+  .digital-magazine-page .moodboard-book-position.is-open-spread,
+  .digital-magazine-page .moodboard-book-position.is-back-cover {
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .digital-magazine-page .moodboard-book-position.is-front-cover {
+    transform: translateX(-25%);
+  }
+
+  .digital-magazine-page .moodboard-book-position.is-back-cover {
+    transform: translateX(25%);
+  }
+}

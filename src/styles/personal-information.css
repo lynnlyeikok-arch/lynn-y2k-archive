@@ -21,18 +21,23 @@ body.is-personal.is-popup-open {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: safe center;
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
-  padding: calc(100% * 58 / 1024.5 + 8px) 0 28px;
+  padding: calc(100vw * 58 / 1024.5 - 3px + 12px) 0 12px;
 }
 
 .personal-board {
   position: relative;
-  width: 100%;
-  max-width: 100%;
+  width: min(
+    90%,
+    calc((100dvh - (100vw * 58 / 1024.5 - 3px) - 24px) * 1024.5 / 576)
+  );
+  max-width: 90%;
   aspect-ratio: 1024.5 / 576;
 }
 
@@ -51,10 +56,22 @@ body.is-personal.is-popup-open {
   transition: transform 240ms ease;
 }
 
-.personal-piece.is-interactive img {
+.personal-piece.is-interactive img,
+.personal-clock img {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.personal-clock-digits {
+  position: absolute;
+  left: 19%;
+  top: 43.4%;
+  width: 61%;
+  height: 23.7%;
+  overflow: visible;
+  fill: #1a1214;
+  pointer-events: none;
 }
 
 .personal-hit {
@@ -87,6 +104,10 @@ body.is-personal.is-popup-open {
 .personal-popup-card {
   position: relative;
   width: min(920px, 92vw);
+}
+
+.personal-popup-card.is-clock {
+  width: calc(min(920px, 92vw) * 646.5 / 1024.5);
 }
 
 .personal-popup-card img {
@@ -168,4 +189,30 @@ body.is-personal.is-popup-open {
   background: transparent;
   cursor: pointer;
   pointer-events: auto;
+}
+
+.personal-popup-close.is-clock {
+  top: 6.62%;
+  left: 91.39%;
+  width: 3.83%;
+  height: 5.93%;
+}
+
+.personal-popup-clock-mask {
+  position: absolute;
+  left: 33.49%;
+  top: 48.13%;
+  z-index: 1;
+  width: 32.83%;
+  height: 20.02%;
+  background: #ecdee4;
+  pointer-events: none;
+}
+
+.personal-popup-card .personal-clock-digits {
+  left: 33.96%;
+  top: 48.83%;
+  z-index: 2;
+  width: 31.9%;
+  height: 18.62%;
 }

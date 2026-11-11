@@ -1,0 +1,38 @@
+html.is-project-reflection,
+body.is-project-reflection {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  background: var(--opening-pink);
+}
+
+.project-reflection-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: calc(100vw * 58 / 1024.5 - 3px + 28px) 40px 40px;
+  overflow-x: hidden;
+}
+
+.project-reflection-art {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(1080px, 100%);
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  aspect-ratio: 1111.5 / 1494;
+}
+
+@media (max-width: 700px) {
+  .project-reflection-page {
+    padding: calc(100vw * 58 / 1024.5 - 3px + 20px) 16px 24px;
+  }
+}

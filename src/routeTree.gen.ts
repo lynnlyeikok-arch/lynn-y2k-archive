@@ -36,7 +36,10 @@ import { Route as PersonalInformationRouteImport } from './routes/personal-infor
 import { Route as ProjectReflectionRouteImport } from './routes/project-reflection'
 import { Route as ReferencesRouteImport } from './routes/references'
 import { Route as SurveyFormResultRouteImport } from './routes/survey-form-result'
-import { Route as WeeklyBlogRouteImport } from './routes/weekly-blog'
+import { Route as WeeklyBlogRouteRouteImport } from './routes/weekly-blog/route'
+import { Route as Y2kStrategyReportRouteImport } from './routes/y2k-strategy-report'
+import { Route as WeeklyBlogIndexRouteImport } from './routes/weekly-blog/index'
+import { Route as WeeklyBlogWeekRouteImport } from './routes/weekly-blog/$week'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -173,14 +176,30 @@ const SurveyFormResultRoute = SurveyFormResultRouteImport.update({
   path: '/survey-form-result',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WeeklyBlogRoute = WeeklyBlogRouteImport.update({
+const WeeklyBlogRouteRoute = WeeklyBlogRouteRouteImport.update({
   id: '/weekly-blog',
   path: '/weekly-blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Y2kStrategyReportRoute = Y2kStrategyReportRouteImport.update({
+  id: '/y2k-strategy-report',
+  path: '/y2k-strategy-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyBlogIndexRoute = WeeklyBlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WeeklyBlogRouteRoute,
+} as any)
+const WeeklyBlogWeekRoute = WeeklyBlogWeekRouteImport.update({
+  id: '/$week',
+  path: '/$week',
+  getParentRoute: () => WeeklyBlogRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/weekly-blog': typeof WeeklyBlogRouteRouteWithChildren
   '/case-study-1': typeof CaseStudy1Route
   '/case-study-2': typeof CaseStudy2Route
   '/case-study-3': typeof CaseStudy3Route
@@ -207,7 +226,9 @@ export interface FileRoutesByFullPath {
   '/project-reflection': typeof ProjectReflectionRoute
   '/references': typeof ReferencesRoute
   '/survey-form-result': typeof SurveyFormResultRoute
-  '/weekly-blog': typeof WeeklyBlogRoute
+  '/y2k-strategy-report': typeof Y2kStrategyReportRoute
+  '/weekly-blog/$week': typeof WeeklyBlogWeekRoute
+  '/weekly-blog/': typeof WeeklyBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -237,11 +258,14 @@ export interface FileRoutesByTo {
   '/project-reflection': typeof ProjectReflectionRoute
   '/references': typeof ReferencesRoute
   '/survey-form-result': typeof SurveyFormResultRoute
-  '/weekly-blog': typeof WeeklyBlogRoute
+  '/y2k-strategy-report': typeof Y2kStrategyReportRoute
+  '/weekly-blog/$week': typeof WeeklyBlogWeekRoute
+  '/weekly-blog': typeof WeeklyBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/weekly-blog': typeof WeeklyBlogRouteRouteWithChildren
   '/case-study-1': typeof CaseStudy1Route
   '/case-study-2': typeof CaseStudy2Route
   '/case-study-3': typeof CaseStudy3Route
@@ -268,12 +292,15 @@ export interface FileRoutesById {
   '/project-reflection': typeof ProjectReflectionRoute
   '/references': typeof ReferencesRoute
   '/survey-form-result': typeof SurveyFormResultRoute
-  '/weekly-blog': typeof WeeklyBlogRoute
+  '/y2k-strategy-report': typeof Y2kStrategyReportRoute
+  '/weekly-blog/$week': typeof WeeklyBlogWeekRoute
+  '/weekly-blog/': typeof WeeklyBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/weekly-blog'
     | '/case-study-1'
     | '/case-study-2'
     | '/case-study-3'
@@ -300,7 +327,9 @@ export interface FileRouteTypes {
     | '/project-reflection'
     | '/references'
     | '/survey-form-result'
-    | '/weekly-blog'
+    | '/y2k-strategy-report'
+    | '/weekly-blog/$week'
+    | '/weekly-blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -330,10 +359,13 @@ export interface FileRouteTypes {
     | '/project-reflection'
     | '/references'
     | '/survey-form-result'
+    | '/y2k-strategy-report'
+    | '/weekly-blog/$week'
     | '/weekly-blog'
   id:
     | '__root__'
     | '/'
+    | '/weekly-blog'
     | '/case-study-1'
     | '/case-study-2'
     | '/case-study-3'
@@ -360,11 +392,14 @@ export interface FileRouteTypes {
     | '/project-reflection'
     | '/references'
     | '/survey-form-result'
-    | '/weekly-blog'
+    | '/y2k-strategy-report'
+    | '/weekly-blog/$week'
+    | '/weekly-blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WeeklyBlogRouteRoute: typeof WeeklyBlogRouteRouteWithChildren
   CaseStudy1Route: typeof CaseStudy1Route
   CaseStudy2Route: typeof CaseStudy2Route
   CaseStudy3Route: typeof CaseStudy3Route
@@ -391,7 +426,7 @@ export interface RootRouteChildren {
   ProjectReflectionRoute: typeof ProjectReflectionRoute
   ReferencesRoute: typeof ReferencesRoute
   SurveyFormResultRoute: typeof SurveyFormResultRoute
-  WeeklyBlogRoute: typeof WeeklyBlogRoute
+  Y2kStrategyReportRoute: typeof Y2kStrategyReportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -589,14 +624,50 @@ declare module '@tanstack/react-router' {
       id: '/weekly-blog'
       path: '/weekly-blog'
       fullPath: '/weekly-blog'
-      preLoaderRoute: typeof WeeklyBlogRouteImport
+      preLoaderRoute: typeof WeeklyBlogRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/y2k-strategy-report': {
+      id: '/y2k-strategy-report'
+      path: '/y2k-strategy-report'
+      fullPath: '/y2k-strategy-report'
+      preLoaderRoute: typeof Y2kStrategyReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-blog/': {
+      id: '/weekly-blog/'
+      path: '/'
+      fullPath: '/weekly-blog/'
+      preLoaderRoute: typeof WeeklyBlogIndexRouteImport
+      parentRoute: typeof WeeklyBlogRouteRoute
+    }
+    '/weekly-blog/$week': {
+      id: '/weekly-blog/$week'
+      path: '/$week'
+      fullPath: '/weekly-blog/$week'
+      preLoaderRoute: typeof WeeklyBlogWeekRouteImport
+      parentRoute: typeof WeeklyBlogRouteRoute
     }
   }
 }
 
+interface WeeklyBlogRouteRouteChildren {
+  WeeklyBlogWeekRoute: typeof WeeklyBlogWeekRoute
+  WeeklyBlogIndexRoute: typeof WeeklyBlogIndexRoute
+}
+
+const WeeklyBlogRouteRouteChildren: WeeklyBlogRouteRouteChildren = {
+  WeeklyBlogWeekRoute: WeeklyBlogWeekRoute,
+  WeeklyBlogIndexRoute: WeeklyBlogIndexRoute,
+}
+
+const WeeklyBlogRouteRouteWithChildren = WeeklyBlogRouteRoute._addFileChildren(
+  WeeklyBlogRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WeeklyBlogRouteRoute: WeeklyBlogRouteRouteWithChildren,
   CaseStudy1Route: CaseStudy1Route,
   CaseStudy2Route: CaseStudy2Route,
   CaseStudy3Route: CaseStudy3Route,
@@ -623,7 +694,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectReflectionRoute: ProjectReflectionRoute,
   ReferencesRoute: ReferencesRoute,
   SurveyFormResultRoute: SurveyFormResultRoute,
-  WeeklyBlogRoute: WeeklyBlogRoute,
+  Y2kStrategyReportRoute: Y2kStrategyReportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

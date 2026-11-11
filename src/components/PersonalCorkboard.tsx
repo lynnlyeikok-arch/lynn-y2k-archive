@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
 import { useNavigate } from '@tanstack/react-router'
+import { MalaysiaClock } from './MalaysiaClock'
 import type { PopupId } from './popupReturn'
 
 const CANVAS_W = 1024.5
@@ -68,6 +69,7 @@ const popups: Record<string, { src: string; label: string; zoom?: PopupZoom & { 
       height: 62.18,
     },
   },
+  doily: { src: '/images/cork-parts/popup-clock.svg', label: 'Malaysia live time' },
 }
 
 // Boxes are taken from Corkboard.svg image matrices and clip bounds.
@@ -143,6 +145,20 @@ export function PersonalCorkboard({ initialOpen = null }: { initialOpen?: string
             ['--rot' as string]: `${piece.rot ?? 0}deg`,
             transformOrigin: piece.origin ?? 'center',
           }
+          if (piece.id === 'doily') {
+            return (
+              <div key={piece.id} className="personal-piece personal-clock is-interactive" style={style}>
+                <img src={`/images/cork-parts/${piece.src}`} alt="" draggable={false} />
+                <MalaysiaClock />
+                <button
+                  type="button"
+                  className="personal-hit"
+                  aria-label={`Open ${popups.doily.label.toLowerCase()}`}
+                  onClick={() => setOpenId(piece.id)}
+                />
+              </div>
+            )
+          }
           const interactive = popups[piece.id]
           if (interactive) {
             const hit = piece.hit
@@ -177,8 +193,14 @@ export function PersonalCorkboard({ initialOpen = null }: { initialOpen?: string
       </div>
       {popup ? (
         <div className="personal-popup" role="dialog" aria-modal="true" aria-label={popup.label}>
-          <div className="personal-popup-card">
+          <div className={openId === 'doily' ? 'personal-popup-card is-clock' : 'personal-popup-card'}>
             <img src={popup.src} alt="" draggable={false} />
+            {openId === 'doily' ? (
+              <>
+                <span className="personal-popup-clock-mask" aria-hidden="true" />
+                <MalaysiaClock />
+              </>
+            ) : null}
             {popup.zoom ? (
               <button
                 type="button"
@@ -208,7 +230,12 @@ export function PersonalCorkboard({ initialOpen = null }: { initialOpen?: string
                 <span className="personal-popup-zoom-label">{popup.zoom.label}</span>
               </button>
             ) : null}
-            <button type="button" className="personal-popup-close" aria-label="Close" onClick={() => setOpenId(null)} />
+            <button
+              type="button"
+              className={openId === 'doily' ? 'personal-popup-close is-clock' : 'personal-popup-close'}
+              aria-label="Close"
+              onClick={() => setOpenId(null)}
+            />
           </div>
         </div>
       ) : null}

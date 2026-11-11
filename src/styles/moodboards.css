@@ -84,8 +84,20 @@ body.is-moodboards {
 .moodboard-book-zoom {
   width: 100%;
   height: fit-content;
-  transform: scale(var(--book-zoom, 1));
+  transform: translate3d(0, 0, 0) scale(1);
   transform-origin: center center;
+  touch-action: none;
+  user-select: none;
+}
+
+.moodboard-book-zoom.is-zoomed,
+.moodboard-book-zoom.is-zoomed * {
+  cursor: grab;
+}
+
+.moodboard-book-stage.is-panning,
+.moodboard-book-stage.is-panning * {
+  cursor: grabbing;
 }
 
 .moodboard-book-host {
@@ -98,7 +110,7 @@ body.is-moodboards {
 }
 
 .moodboard-book-root,
-.stf__parent {
+.moodboard-book-zoom .stf__parent {
   width: 100%;
   touch-action: none;
 }

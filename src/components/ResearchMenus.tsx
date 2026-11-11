@@ -85,6 +85,9 @@ export function PrimaryResearchMenu({ className = '' }: { className?: string }) 
         <li>
           <Link to="/survey-form-result">SURVEY FORM RESULT</Link>
         </li>
+        <li>
+          <Link to="/y2k-strategy-report">Y2K STRATEGY REPORT</Link>
+        </li>
         <li
           className={`intro-interview${interviewOpen ? ' is-open' : ''}`}
           onMouseEnter={() => {

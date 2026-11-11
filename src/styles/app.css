@@ -7,11 +7,18 @@
 @import './size-journey.css';
 @import './intro.css';
 @import './moodboards.css';
+@import './digital-magazine.css';
 @import './blank-section.css';
 @import './personal-information.css';
+@import './creator-note.css';
+@import './project-reflection.css';
+@import './weekly-blog.css';
 @import './case-study.css';
 @import './chapter.css';
 @import './primary.css';
+@import './strategy-report.css';
+@import './instagram-account.css';
+@import './references.css';
 
 html,
 body,

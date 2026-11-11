@@ -8,5 +8,9 @@ dist
 .cursor
 .git
 references
-**/*.pdf
+public/assets/moodboard/MOODBOARD.pdf
 agent-transcripts
+backup
+public/images/cork-pieces
+public/images/corkboard.svg
+public/images/intro.svg

@@ -16,6 +16,7 @@ export default defineConfig({
         '**/public/images/primary/**',
         '**/public/images/intro-3.svg',
         '**/public/images/cork-parts/**',
+        '**/public/images/weekly-blog/**',
       ],
     },
   },

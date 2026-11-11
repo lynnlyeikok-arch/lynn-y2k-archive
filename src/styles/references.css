@@ -1,0 +1,82 @@
+html.is-references,
+body.is-references {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  background: var(--references-pink, #f7c6d4);
+}
+
+.references-page {
+  --references-header: calc(100vw * 58 / 1024.5 - 3px);
+  --references-pink: #f7c6d4;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: var(--references-header) 0 0;
+  overflow-x: hidden;
+  background: var(--references-pink);
+}
+
+.references-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.references-viewer {
+  width: 100%;
+  margin: 0;
+}
+
+.references-sheet {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  --user-unit: 1;
+  --scale-round-x: 1px;
+  --scale-round-y: 1px;
+  --total-scale-factor: calc(var(--scale-factor) * var(--user-unit));
+}
+
+.references-sheet canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.references-sheet .annotationLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+
+.references-sheet .annotationLayer section {
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: auto;
+  transform-origin: 0 0;
+}
+
+.references-sheet .annotationLayer .linkAnnotation > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.references-sheet .annotationLayer .linkAnnotation:not(.hasBorder) > a:hover {
+  background-color: rgb(255 255 0 / 20%);
+  opacity: 1;
+}

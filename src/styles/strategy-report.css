@@ -1,0 +1,85 @@
+html.is-strategy-report,
+body.is-strategy-report {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  background: #ffffff;
+}
+
+.strategy-report-page {
+  --strategy-header: calc(100vw * 58 / 1024.5 - 3px);
+  --cover-height: calc(100dvh - var(--strategy-header));
+  --report-ratio: calc(6447.75 / 1024.5);
+  container-type: inline-size;
+  width: 100%;
+  margin: 0;
+  padding: var(--strategy-header) 0 0;
+  background: #ffffff;
+  background-repeat: no-repeat;
+  overflow-x: clip;
+}
+
+.strategy-report-cover {
+  position: relative;
+  width: 100%;
+  height: var(--cover-height);
+  margin: -1px 0 0;
+  padding: 0;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+.strategy-report-cover img,
+.strategy-report-content img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.strategy-report-cover img {
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.strategy-report-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2a1c22;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 1px #ffffff) drop-shadow(0 0 2px #ffffff);
+  cursor: pointer;
+}
+
+.strategy-report-arrow svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.strategy-report-content {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: max(0px, calc(100cqw * var(--report-ratio) - var(--cover-height)));
+  background-repeat: no-repeat;
+}
+
+.strategy-report-content img {
+  height: auto;
+  margin-top: calc(-1 * var(--cover-height));
+}
