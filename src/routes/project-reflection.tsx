@@ -27,7 +27,7 @@ function ProjectReflectionPage() {
       </div>
       <img
         className="project-reflection-art"
-        src="/images/cork-parts/project-reflection.svg?v=40"
+        src="/images/cork-parts/project-reflection.svg?v=42"
         alt="My Reflection. One Size Does Not Fit All, by Kok Lynn Lyei."
         width={1111.5}
         height={1494}
