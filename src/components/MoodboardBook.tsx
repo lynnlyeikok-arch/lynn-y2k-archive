@@ -6,7 +6,6 @@ const PAGE_W = 683
 const PAGE_H = Math.round(PAGE_W / PAGE_RATIO)
 const FLIP_MS = 950
 const PORTRAIT_BREAKPOINT = 768
-const ZOOM_STEPS = [1, 1.25, 1.5, 1.75, 2, 2.5, 3]
 
 type BookPage = {
   id: string
@@ -35,7 +34,12 @@ type FlipApi = {
   flipNext: (corner?: 'top' | 'bottom') => void
   flipPrev: (corner?: 'top' | 'bottom') => void
   getCurrentPageIndex: () => number
-  getSettings: () => { usePortrait: boolean; minWidth: number; showPageCorners: boolean }
+  getSettings: () => {
+    usePortrait: boolean
+    minWidth: number
+    showPageCorners: boolean
+    disableFlipByClick: boolean
+  }
   startUserTouch: (pos: { x: number; y: number }) => void
   userMove: (pos: { x: number; y: number }, isTouch: boolean) => void
   userStop: (pos: { x: number; y: number }, isSwipe?: boolean) => void
@@ -46,7 +50,8 @@ type FlipApi = {
 type View = { scale: number; x: number; y: number }
 
 const DRAG_THRESHOLD = 6
-const MAX_ZOOM = ZOOM_STEPS[ZOOM_STEPS.length - 1]
+const DETAIL_ZOOM = 2.5
+const MAX_ZOOM = 3
 
 function clampView(view: View, width: number, height: number): View {
   const scale = Math.min(MAX_ZOOM, Math.max(1, view.scale))
@@ -71,12 +76,12 @@ function viewFromIndex(currentPageIndex: number, pageCount: number): BookView {
   return 'open-spread'
 }
 
-function stepZoom(current: number, direction: 1 | -1) {
-  if (direction > 0) {
-    return ZOOM_STEPS.find((step) => step > current + 0.01) ?? ZOOM_STEPS[ZOOM_STEPS.length - 1]
-  }
-  const previous = [...ZOOM_STEPS].reverse().find((step) => step < current - 0.01)
-  return previous ?? ZOOM_STEPS[0]
+function turnBook(api: FlipApi, direction: 1 | -1) {
+  const settings = api.getSettings()
+  settings.disableFlipByClick = false
+  if (direction > 0) api.flipNext('top')
+  else api.flipPrev('top')
+  settings.disableFlipByClick = true
 }
 
 function pageNumberLabel(index: number, view: BookView, portrait: boolean, pageCount: number) {
@@ -146,7 +151,6 @@ export function MoodboardBook({
   const [bookView, setBookView] = useState<BookView>('front-cover')
   const [pageIndex, setPageIndex] = useState(0)
   const [portrait, setPortrait] = useState(false)
-  const [zoom, setZoom] = useState(1)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [fullscreenAvailable, setFullscreenAvailable] = useState(false)
 
@@ -246,11 +250,11 @@ export function MoodboardBook({
       if (event.key === 'ArrowRight') {
         event.preventDefault()
         const index = api.getCurrentPageIndex()
-        if (index < lastPage) api.flipNext('top')
+        if (index < lastPage) turnBook(api, 1)
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault()
         const index = api.getCurrentPageIndex()
-        if (index > 0) api.flipPrev('top')
+        if (index > 0) turnBook(api, -1)
       }
     }
     window.addEventListener('keydown', onKey)
@@ -314,7 +318,6 @@ export function MoodboardBook({
     }
     const settings = flipRef.current?.getSettings()
     if (settings) settings.showPageCorners = next.scale <= 1
-    setZoom((current) => (Math.abs(current - next.scale) < 0.001 ? current : next.scale))
   }
 
   const zoomAt = (clientX: number, clientY: number, nextScale: number) => {
@@ -379,6 +382,50 @@ export function MoodboardBook({
     }
 
     const endPanCursor = () => stage.classList.remove('is-panning')
+    let lastTapAt = 0
+    let lastTapX = 0
+    let lastTapY = 0
+    let ignoreDoubleClickUntil = 0
+    let gestureMoved = false
+
+    const toggleZoom = (clientX: number, clientY: number) => {
+      if (viewRef.current.scale > 1) {
+        applyView({ scale: 1, x: 0, y: 0 })
+        return
+      }
+      zoomAt(clientX, clientY, DETAIL_ZOOM)
+    }
+
+    const onDoubleClick = (event: MouseEvent) => {
+      if (event.button !== 0 || performance.now() < ignoreDoubleClickUntil) return
+      const target = event.target
+      if (target instanceof Element && target.closest('button, a')) return
+      if (!onBook(target) && viewRef.current.scale <= 1) return
+      event.preventDefault()
+      event.stopPropagation()
+      toggleZoom(event.clientX, event.clientY)
+    }
+
+    const onTouchEnd = (event: TouchEvent) => {
+      if (gestureMoved || event.changedTouches.length !== 1) {
+        gestureMoved = false
+        lastTapAt = 0
+        return
+      }
+      const touch = event.changedTouches[0]
+      const now = performance.now()
+      const closeEnough = Math.hypot(touch.clientX - lastTapX, touch.clientY - lastTapY) < 28
+      if (now - lastTapAt < 320 && closeEnough) {
+        lastTapAt = 0
+        ignoreDoubleClickUntil = now + 700
+        event.preventDefault()
+        toggleZoom(touch.clientX, touch.clientY)
+        return
+      }
+      lastTapAt = now
+      lastTapX = touch.clientX
+      lastTapY = touch.clientY
+    }
 
     const onWheel = (event: WheelEvent) => {
       if (!onBook(event.target) && viewRef.current.scale <= 1) return
@@ -422,6 +469,7 @@ export function MoodboardBook({
         return
       }
       pinch = null
+      gestureMoved = false
       drag = { x: event.clientX, y: event.clientY, moved: false, turning: false }
     }
 
@@ -450,6 +498,7 @@ export function MoodboardBook({
       const dy = event.clientY - point.y
       const distance = Math.hypot(event.clientX - drag.x, event.clientY - drag.y)
       if (!drag.moved && distance < DRAG_THRESHOLD) return
+      gestureMoved = true
       if (!drag.moved) {
         drag.moved = true
         if (viewRef.current.scale > 1) {
@@ -492,10 +541,6 @@ export function MoodboardBook({
       pinch = null
       endPanCursor()
       if (!finished) return
-      if (!finished.moved && viewRef.current.scale < MAX_ZOOM) {
-        zoomAt(finished.x, finished.y, stepZoom(viewRef.current.scale, 1))
-        return
-      }
       if (finished.turning) {
         const pos = bookPoint(event.clientX, event.clientY)
         if (pos) flipRef.current?.userStop(pos)
@@ -503,6 +548,8 @@ export function MoodboardBook({
     }
 
     stage.addEventListener('wheel', onWheel, { passive: false })
+    stage.addEventListener('dblclick', onDoubleClick)
+    stage.addEventListener('touchend', onTouchEnd, { passive: false })
     stage.addEventListener('pointerdown', onPointerDown)
     stage.addEventListener('pointermove', onPointerMove)
     stage.addEventListener('pointerup', finishPointer)
@@ -511,6 +558,8 @@ export function MoodboardBook({
     stage.addEventListener('touchstart', stopBookGesture, true)
     return () => {
       stage.removeEventListener('wheel', onWheel)
+      stage.removeEventListener('dblclick', onDoubleClick)
+      stage.removeEventListener('touchend', onTouchEnd)
       stage.removeEventListener('pointerdown', onPointerDown)
       stage.removeEventListener('pointermove', onPointerMove)
       stage.removeEventListener('pointerup', finishPointer)
@@ -520,16 +569,6 @@ export function MoodboardBook({
       endPanCursor()
     }
   }, [])
-
-  const zoomByButton = (direction: 1 | -1) => {
-    const stage = stageRef.current?.getBoundingClientRect()
-    const x = stage ? stage.left + stage.width / 2 : window.innerWidth / 2
-    const y = stage ? stage.top + stage.height / 2 : window.innerHeight / 2
-    zoomAt(x, y, stepZoom(viewRef.current.scale, direction))
-  }
-
-  const zoomOut = () => zoomByButton(-1)
-  const zoomIn = () => zoomByButton(1)
 
   const toggleFullscreen = () => {
     const viewer = document.querySelector(fullscreenSelector)
@@ -563,37 +602,9 @@ export function MoodboardBook({
         </div>
       </div>
       <div className="moodboard-bottom-controls" role="toolbar" aria-label={controlsLabel}>
-        <button
-          type="button"
-          className="moodboard-control-button"
-          aria-label="Zoom out"
-          disabled={zoom <= 1}
-          onClick={zoomOut}
-        >
-          −
-        </button>
-        <button
-          type="button"
-          className="moodboard-control-button"
-          aria-label="Zoom in"
-          disabled={zoom >= 3}
-          onClick={zoomIn}
-        >
-          +
-        </button>
         <div className="moodboard-page-indicator" aria-live="polite">
           {pageNumberLabel(pageIndex, bookView, portrait, pageCount)}
         </div>
-        <button
-          type="button"
-          className="moodboard-control-button"
-          aria-label="Content"
-          disabled
-          aria-disabled="true"
-          title="Content navigation will be added next"
-        >
-          Content
-        </button>
         <button
           type="button"
           className="moodboard-control-button"

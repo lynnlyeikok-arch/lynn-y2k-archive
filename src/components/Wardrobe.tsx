@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type RefObject } from 'react'
 import { clamp } from '../utils/timelineProgress'
 import { loadOutfit, saveOutfit } from '../utils/outfitState'
 
@@ -146,29 +146,120 @@ function Chevron({ direction }: { direction: 'prev' | 'next' }) {
   )
 }
 
-function useCanvasScale(width: number, height: number) {
-  const hostRef = useRef<HTMLDivElement>(null)
-  const [scale, setScale] = useState(1)
+const PHONE_QUERY = '(max-width: 700px)'
 
-  useEffect(() => {
+type PhoneFrame = {
+  tops: Record<number, Slot>
+  bottoms: Record<number, Slot>
+  arrowTop: number
+  arrowBottom: number
+  topSwipe: number
+  topSwipeH: number
+  bottomSwipe: number
+  bottomSwipeH: number
+}
+
+function phoneFrame(width: number, height: number): PhoneFrame {
+  const arrow = 44
+  const titleBand = 64
+  const doneBand = 68
+  const gap = 8
+  const topStart = titleBand
+  const clothesEnd = Math.max(topStart + 180, height - doneBand)
+  const clothes = clothesEnd - topStart
+  const topBand = Math.max(80, clothes * 0.36)
+  const bottomStart = topStart + topBand + gap
+  const bottomBand = Math.max(110, clothesEnd - bottomStart)
+  const innerW = Math.max(120, width - arrow * 2)
+  const xAt = (t: number) => arrow + innerW * t
+  const xs: Record<number, number> = {
+    [-3]: xAt(-0.45),
+    [-2]: xAt(-0.18),
+    [-1]: xAt(0.17),
+    [0]: xAt(0.5),
+    [1]: xAt(0.83),
+    [2]: xAt(1.18),
+    [3]: xAt(1.45),
+  }
+  const sideW = innerW * 0.28
+  const centerW = innerW * 0.38
+  const topCenterY = topStart + topBand * 0.5
+  const topSideH = topBand * 0.78
+  const topCenterH = topBand * 0.94
+  const bottomCenterH = bottomBand * 0.98
+  const bottomSideH = bottomBand * 0.86
+  const tone = (key: number) =>
+    key === 0 ? 1 : Math.abs(key) === 1 ? 0.55 : Math.abs(key) === 2 ? 0.3 : 0.12
+  const depth = (key: number) => (key === 0 ? 6 : Math.abs(key) === 1 ? 3 : 1)
+  const tops: Record<number, Slot> = {}
+  const bottoms: Record<number, Slot> = {}
+  for (const key of [-3, -2, -1, 0, 1, 2, 3]) {
+    const selected = key === 0
+    tops[key] = {
+      cx: xs[key] ?? 0,
+      y: topCenterY,
+      w: selected ? centerW : sideW,
+      h: selected ? topCenterH : topSideH,
+      brightness: tone(key),
+      z: depth(key),
+    }
+    bottoms[key] = {
+      cx: xs[key] ?? 0,
+      y: bottomStart,
+      w: selected ? centerW : sideW,
+      h: selected ? bottomCenterH : bottomSideH,
+      brightness: tone(key),
+      z: depth(key),
+    }
+  }
+  return {
+    tops,
+    bottoms,
+    arrowTop: topCenterY,
+    arrowBottom: bottomStart + bottomCenterH / 2,
+    topSwipe: topStart,
+    topSwipeH: topBand,
+    bottomSwipe: bottomStart,
+    bottomSwipeH: bottomBand,
+  }
+}
+
+function useWardrobeStage() {
+  const hostRef = useRef<HTMLDivElement>(null)
+  const [stage, setStage] = useState({
+    phone: false,
+    hostW: 0,
+    hostH: 0,
+    scale: 1,
+  })
+
+  useLayoutEffect(() => {
     const host = hostRef.current
     if (!host) return
-
+    const media = window.matchMedia(PHONE_QUERY)
     const update = () => {
-      setScale(Math.min(host.clientWidth / width, host.clientHeight / height))
+      const phone = media.matches
+      const hostW = host.clientWidth
+      const hostH = host.clientHeight
+      const scale =
+        phone || hostW < 1 || hostH < 1
+          ? 1
+          : Math.min(hostW / CANVAS_WIDTH, hostH / CANVAS_HEIGHT)
+      setStage({ phone, hostW, hostH, scale })
     }
-
     update()
     const observer = new ResizeObserver(update)
     observer.observe(host)
+    media.addEventListener('change', update)
     window.addEventListener('resize', update)
     return () => {
       observer.disconnect()
+      media.removeEventListener('change', update)
       window.removeEventListener('resize', update)
     }
-  }, [width, height])
+  }, [])
 
-  return { hostRef, scale }
+  return { hostRef, ...stage }
 }
 
 function useRowCarousel(initialIndex: number, compact: boolean) {
@@ -234,7 +325,8 @@ function useRowCarousel(initialIndex: number, compact: boolean) {
 }
 
 export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: WardrobeProps) {
-  const { hostRef, scale } = useCanvasScale(CANVAS_WIDTH, CANVAS_HEIGHT)
+  const { hostRef, phone, hostW, hostH, scale } = useWardrobeStage()
+  const frame = phone && hostW > 0 && hostH > 0 ? phoneFrame(hostW, hostH) : null
   const [compact, setCompact] = useState(false)
   const tops = useRowCarousel(2, compact)
   const bottoms = useRowCarousel(2, compact)
@@ -283,7 +375,7 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
   return (
     <div
       ref={hostRef}
-      className={`wardrobe${interactive ? ' is-ready' : ''}${exiting ? ' is-exiting' : ''}`}
+      className={`wardrobe${interactive ? ' is-ready' : ''}${exiting ? ' is-exiting' : ''}${frame ? ' is-phone' : ''}`}
       style={{
         opacity: reveal,
         pointerEvents: interactive && !exiting ? 'auto' : 'none',
@@ -294,13 +386,23 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
       <div
         className="wardrobe-shell"
         style={{
-          width: CANVAS_WIDTH * scale,
-          height: CANVAS_HEIGHT * scale,
+          width: frame ? hostW : CANVAS_WIDTH * scale,
+          height: frame ? hostH : CANVAS_HEIGHT * scale,
         }}
       >
         <div
           className="wardrobe-canvas"
-          style={{ transform: `scale(${scale})` }}
+          style={
+            {
+              transform: `scale(${scale})`,
+              '--arrow-top': frame ? `${frame.arrowTop}px` : undefined,
+              '--arrow-bottom': frame ? `${frame.arrowBottom}px` : undefined,
+              '--swipe-top': frame ? `${frame.topSwipe}px` : undefined,
+              '--swipe-top-h': frame ? `${frame.topSwipeH}px` : undefined,
+              '--swipe-bottom': frame ? `${frame.bottomSwipe}px` : undefined,
+              '--swipe-bottom-h': frame ? `${frame.bottomSwipeH}px` : undefined,
+            } as CSSProperties
+          }
         >
         <h2 className="wardrobe-title" style={{ opacity: titleReveal }}>
           CHOOSE YOUR Y2K OUTFIT
@@ -312,7 +414,7 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
           label="top"
           items={TOPS}
           carousel={tops}
-          slots={TOP_SLOTS}
+          slots={frame?.tops ?? TOP_SLOTS}
           anchor="center"
           reveal={topReveal}
           controls={controlsReveal}
@@ -326,7 +428,7 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
           label="bottom"
           items={BOTTOMS}
           carousel={bottoms}
-          slots={BOTTOM_SLOTS}
+          slots={frame?.bottoms ?? BOTTOM_SLOTS}
           anchor="top"
           reveal={bottomReveal}
           controls={controlsReveal}

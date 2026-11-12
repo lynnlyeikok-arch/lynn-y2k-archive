@@ -1,0 +1,74 @@
+@media (max-width: 700px) {
+  .weekly-blog-page,
+  .project-reflection-page {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .creator-note-page {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .creator-note-art {
+    width: calc(100vw - 16px);
+  }
+
+  .creator-note-back,
+  .digital-magazine-back,
+  .blank-section-back a,
+  .blank-section-back button {
+    min-height: 44px;
+    padding: 8px 4px;
+    font-size: 16px;
+  }
+
+  .personal-stage {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 8px;
+  }
+
+  .personal-board {
+    width: min(
+      100%,
+      calc((100dvh - (100vw * 58 / 1024.5 - 3px) - 8px) * 1024.5 / 576)
+    );
+    max-width: 100%;
+  }
+
+  .moodboard-book-host {
+    width: min(96vw, 540px);
+  }
+
+  .moodboard-bottom-controls {
+    font-size: 16px;
+  }
+
+  .moodboard-control-button {
+    min-width: 44px;
+    min-height: 44px;
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .intro-about-menu {
+    max-width: min(78vw, calc(100vw - 16px));
+  }
+
+  .intro-about-menu a,
+  .intro-interview-trigger {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .blank-section {
+    padding: 16px 12px;
+  }
+
+  .blank-section h1 {
+    font-size: clamp(26px, 8vw, 40px);
+  }
+}

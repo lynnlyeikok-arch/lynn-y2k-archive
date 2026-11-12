@@ -211,6 +211,86 @@
   transition: opacity 520ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+@media (max-width: 700px) {
+  .wardrobe.is-phone {
+    place-items: stretch;
+  }
+
+  .wardrobe.is-phone .wardrobe-shell,
+  .wardrobe.is-phone .wardrobe-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .wardrobe.is-phone .wardrobe-title {
+    top: 8px;
+    width: 100%;
+    padding: 0 52px;
+    box-sizing: border-box;
+    font-size: clamp(20px, 6.4vw, 32px);
+    line-height: 1.15;
+  }
+
+  .wardrobe.is-phone .wardrobe-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .wardrobe.is-phone .wardrobe-chevron {
+    width: 28px;
+    height: 40px;
+  }
+
+  .wardrobe.is-phone .wardrobe-arrow.is-top-prev,
+  .wardrobe.is-phone .wardrobe-arrow.is-top-next {
+    top: calc(var(--arrow-top) - 22px);
+  }
+
+  .wardrobe.is-phone .wardrobe-arrow.is-bottom-prev,
+  .wardrobe.is-phone .wardrobe-arrow.is-bottom-next {
+    top: calc(var(--arrow-bottom) - 22px);
+  }
+
+  .wardrobe.is-phone .wardrobe-arrow.is-top-prev,
+  .wardrobe.is-phone .wardrobe-arrow.is-bottom-prev {
+    left: 0;
+  }
+
+  .wardrobe.is-phone .wardrobe-arrow.is-top-next,
+  .wardrobe.is-phone .wardrobe-arrow.is-bottom-next {
+    left: auto;
+    right: 0;
+  }
+
+  .wardrobe.is-phone .wardrobe-swipe {
+    left: 44px;
+    width: calc(100% - 88px);
+  }
+
+  .wardrobe.is-phone .wardrobe-row.is-tops .wardrobe-swipe {
+    top: var(--swipe-top);
+    height: var(--swipe-top-h);
+  }
+
+  .wardrobe.is-phone .wardrobe-row.is-bottoms .wardrobe-swipe {
+    top: var(--swipe-bottom);
+    height: var(--swipe-bottom-h);
+  }
+
+  .wardrobe.is-phone .wardrobe-done {
+    left: 50%;
+    top: auto;
+    bottom: 12px;
+    width: max-content;
+    min-width: 96px;
+    min-height: 44px;
+    height: 48px;
+    padding: 0 22px 4px;
+    transform: translateX(-50%);
+    font-size: 28px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wardrobe,
   .wardrobe-item,
