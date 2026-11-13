@@ -28,10 +28,14 @@ type PopupZoom = {
   height: number
 }
 
-const popups: Record<string, { src: string; label: string; zoom?: PopupZoom & { id: PopupId } }> = {
+/** Phone crop, as percentages of the 1024.5×576 popup viewBox. Desktop still shows the full file. */
+type PopupCrop = { x: number; y: number; w: number; h: number }
+
+const popups: Record<string, { src: string; label: string; crop?: PopupCrop; zoom?: PopupZoom & { id: PopupId } }> = {
   'id-card': {
     src: '/images/cork-parts/popup.svg',
     label: 'Personal information',
+    crop: { x: 24.2, y: 24.2, w: 50.2, h: 60.5 },
     zoom: {
       id: 'id-card',
       label: 'CLICK TO SEE A NOTE FROM THE CREATOR',
@@ -42,10 +46,15 @@ const popups: Record<string, { src: string; label: string; zoom?: PopupZoom & { 
       height: 60.5,
     },
   },
-  quote: { src: '/images/cork-parts/popup-quote.svg', label: 'Quote' },
+  quote: {
+    src: '/images/cork-parts/popup-quote.svg',
+    label: 'Quote',
+    crop: { x: 26, y: 26.1, w: 53.3, h: 34.8 },
+  },
   magazine: {
     src: '/images/cork-parts/popup-magazine.svg',
     label: 'Digital magazine',
+    crop: { x: 38.2, y: 27.7, w: 23.3, h: 54.5 },
     zoom: {
       id: 'magazine',
       label: "CLICK TO SEE MAGAZINE'S FULL VIEW",
@@ -59,6 +68,7 @@ const popups: Record<string, { src: string; label: string; zoom?: PopupZoom & { 
   calendar: {
     src: '/images/cork-parts/popup-calendar.svg',
     label: 'Calendar',
+    crop: { x: 28.75, y: 21.89, w: 43.69, h: 62.18 },
     zoom: {
       id: 'calendar',
       label: 'CLICK TO SEE WEEKLY BLOG',
@@ -193,43 +203,53 @@ export function PersonalCorkboard({ initialOpen = null }: { initialOpen?: string
       </div>
       {popup ? (
         <div className="personal-popup" role="dialog" aria-modal="true" aria-label={popup.label}>
-          <div className={openId === 'doily' ? 'personal-popup-card is-clock' : 'personal-popup-card'}>
-            <img src={popup.src} alt="" draggable={false} />
-            {openId === 'doily' ? (
-              <>
-                <span className="personal-popup-clock-mask" aria-hidden="true" />
-                <MalaysiaClock />
-              </>
-            ) : null}
-            {popup.zoom ? (
-              <button
-                type="button"
-                className="personal-popup-zoom"
-                style={
-                  {
-                    left: `${popup.zoom.left}%`,
-                    top: `${popup.zoom.top}%`,
-                    width: `${popup.zoom.width}%`,
-                    height: `${popup.zoom.height}%`,
-                    '--x': popup.zoom.left,
-                    '--y': popup.zoom.top,
-                    '--w': popup.zoom.width,
-                    '--h': popup.zoom.height,
-                  } as CSSProperties
-                }
-                onClick={() =>
-                  navigate({
-                    to: popup.zoom!.to,
-                    state: { fromPopup: popup.zoom!.id, scrollY: scrollRef.current },
-                  })
-                }
-              >
-                <span className="personal-popup-zoom-frame">
-                  <img src={popup.src} alt="" draggable={false} />
-                </span>
-                <span className="personal-popup-zoom-label">{popup.zoom.label}</span>
-              </button>
-            ) : null}
+          <div
+            className={openId === 'doily' ? 'personal-popup-card is-clock' : 'personal-popup-card'}
+            style={
+              popup.crop
+                ? ({
+                    '--crop-x': popup.crop.x / 100,
+                    '--crop-y': popup.crop.y / 100,
+                    '--crop-w': popup.crop.w / 100,
+                    '--crop-h': popup.crop.h / 100,
+                  } as CSSProperties)
+                : undefined
+            }
+          >
+            <div className="personal-popup-fit">
+              <img src={popup.src} alt="" draggable={false} />
+              {openId === 'doily' ? (
+                <>
+                  <span className="personal-popup-clock-mask" aria-hidden="true" />
+                  <MalaysiaClock />
+                </>
+              ) : null}
+              {popup.zoom ? (
+                <button
+                  type="button"
+                  className="personal-popup-zoom"
+                  style={
+                    {
+                      '--x': popup.zoom.left,
+                      '--y': popup.zoom.top,
+                      '--w': popup.zoom.width,
+                      '--h': popup.zoom.height,
+                    } as CSSProperties
+                  }
+                  onClick={() =>
+                    navigate({
+                      to: popup.zoom!.to,
+                      state: { fromPopup: popup.zoom!.id, scrollY: scrollRef.current },
+                    })
+                  }
+                >
+                  <span className="personal-popup-zoom-frame">
+                    <img src={popup.src} alt="" draggable={false} />
+                  </span>
+                  <span className="personal-popup-zoom-label">{popup.zoom.label}</span>
+                </button>
+              ) : null}
+            </div>
             <button
               type="button"
               className={openId === 'doily' ? 'personal-popup-close is-clock' : 'personal-popup-close'}

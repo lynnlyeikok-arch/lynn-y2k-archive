@@ -106,6 +106,10 @@ body.is-personal.is-popup-open {
   width: min(920px, 92vw);
 }
 
+.personal-popup-fit {
+  display: contents;
+}
+
 .personal-popup-card.is-clock {
   width: calc(min(920px, 92vw) * 646.5 / 1024.5);
 }
@@ -120,6 +124,10 @@ body.is-personal.is-popup-open {
 .personal-popup-zoom {
   position: absolute;
   z-index: 1;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
   padding: 0;
   border: 0;
   background: transparent;
