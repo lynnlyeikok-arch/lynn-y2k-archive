@@ -24,6 +24,7 @@ type Garment = {
   visualScale: number
   offsetX: number
   offsetY: number
+  ratio: number
 }
 
 const CANVAS_WIDTH = 1366
@@ -34,29 +35,29 @@ const ANIM_MS = 580
 const SWIPE_PX = 48
 
 const TOPS: Garment[] = [
-  { src: '/images/tops/top-01.png', label: 'Top 01', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-02.png', label: 'Top 02', visualScale: 1, offsetX: 0, offsetY: 4 },
-  { src: '/images/tops/top-03.png', label: 'Top 03', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-04.png', label: 'Top 04', visualScale: 1, offsetX: 0, offsetY: 2 },
-  { src: '/images/tops/top-05.png', label: 'Top 05', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-06.png', label: 'Top 06', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-07.png', label: 'Top 07', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-08.png', label: 'Top 08', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-09.png', label: 'Top 09', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/tops/top-10.png', label: 'Top 10', visualScale: 1, offsetX: 0, offsetY: 0 },
+  { src: '/images/tops/top-01.png', label: 'Top 01', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 267 / 246 },
+  { src: '/images/tops/top-02.png', label: 'Top 02', visualScale: 1, offsetX: 0, offsetY: 4, ratio: 271 / 217 },
+  { src: '/images/tops/top-03.png', label: 'Top 03', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 283 / 298 },
+  { src: '/images/tops/top-04.png', label: 'Top 04', visualScale: 1, offsetX: 0, offsetY: 2, ratio: 1 },
+  { src: '/images/tops/top-05.png', label: 'Top 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 260 / 195 },
+  { src: '/images/tops/top-06.png', label: 'Top 06', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/tops/top-07.png', label: 'Top 07', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/tops/top-08.png', label: 'Top 08', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 360 / 331 },
+  { src: '/images/tops/top-09.png', label: 'Top 09', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 437 / 350 },
+  { src: '/images/tops/top-10.png', label: 'Top 10', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
 ]
 
 const BOTTOMS: Garment[] = [
-  { src: '/images/bottoms/bottom-01.png', label: 'Bottom 01', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-02.png', label: 'Bottom 02', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-03.png', label: 'Bottom 03', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-04.png', label: 'Bottom 04', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-05.png', label: 'Bottom 05', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-06.png', label: 'Bottom 06', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-07.png', label: 'Bottom 07', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-08.png', label: 'Bottom 08', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-09.png', label: 'Bottom 09', visualScale: 1, offsetX: 0, offsetY: 0 },
-  { src: '/images/bottoms/bottom-10.png', label: 'Bottom 10', visualScale: 1, offsetX: 0, offsetY: 0 },
+  { src: '/images/bottoms/bottom-01.png', label: 'Bottom 01', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/bottoms/bottom-02.png', label: 'Bottom 02', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 172 / 222 },
+  { src: '/images/bottoms/bottom-03.png', label: 'Bottom 03', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 454 / 341 },
+  { src: '/images/bottoms/bottom-04.png', label: 'Bottom 04', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 386 / 290 },
+  { src: '/images/bottoms/bottom-05.png', label: 'Bottom 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/bottoms/bottom-06.png', label: 'Bottom 06', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 229 / 258 },
+  { src: '/images/bottoms/bottom-07.png', label: 'Bottom 07', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 489 / 382 },
+  { src: '/images/bottoms/bottom-08.png', label: 'Bottom 08', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/bottoms/bottom-09.png', label: 'Bottom 09', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/bottoms/bottom-10.png', label: 'Bottom 10', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
 ]
 
 const TOP_SLOTS: Record<number, Slot> = {
@@ -151,26 +152,33 @@ const PHONE_QUERY = '(max-width: 700px)'
 type PhoneFrame = {
   tops: Record<number, Slot>
   bottoms: Record<number, Slot>
-  arrowTop: number
-  arrowBottom: number
-  topSwipe: number
-  topSwipeH: number
-  bottomSwipe: number
-  bottomSwipeH: number
+  topRow: number
+  bottomRow: number
 }
 
 function phoneFrame(width: number, height: number): PhoneFrame {
   const arrow = 44
-  const titleBand = 64
-  const doneBand = 68
-  const gap = 8
-  const topStart = titleBand
-  const clothesEnd = Math.max(topStart + 180, height - doneBand)
-  const clothes = clothesEnd - topStart
-  const topBand = Math.max(80, clothes * 0.36)
-  const bottomStart = topStart + topBand + gap
-  const bottomBand = Math.max(110, clothesEnd - bottomStart)
-  const innerW = Math.max(120, width - arrow * 2)
+  const titleH = 46
+  const rowGap = 12
+  const doneGap = 14
+  const doneH = 48
+  const chrome = titleH + rowGap + doneGap + doneH
+  const topAspect = Math.max(...TOPS.map((item) => item.ratio))
+  const bottomAspect = Math.max(...BOTTOMS.map((item) => item.ratio))
+  let innerW = Math.max(120, width - arrow * 2)
+  let centerW = innerW * 0.4
+  let sideW = innerW * 0.3
+  let topH = centerW * topAspect
+  let bottomH = centerW * bottomAspect
+  const clothes = topH + bottomH
+  const limit = Math.max(160, height - chrome - 24)
+  if (clothes > limit) {
+    const scale = limit / clothes
+    centerW *= scale
+    sideW *= scale
+    topH *= scale
+    bottomH *= scale
+  }
   const xAt = (t: number) => arrow + innerW * t
   const xs: Record<number, number> = {
     [-3]: xAt(-0.45),
@@ -181,13 +189,6 @@ function phoneFrame(width: number, height: number): PhoneFrame {
     [2]: xAt(1.18),
     [3]: xAt(1.45),
   }
-  const sideW = innerW * 0.28
-  const centerW = innerW * 0.38
-  const topCenterY = topStart + topBand * 0.5
-  const topSideH = topBand * 0.78
-  const topCenterH = topBand * 0.94
-  const bottomCenterH = bottomBand * 0.98
-  const bottomSideH = bottomBand * 0.86
   const tone = (key: number) =>
     key === 0 ? 1 : Math.abs(key) === 1 ? 0.55 : Math.abs(key) === 2 ? 0.3 : 0.12
   const depth = (key: number) => (key === 0 ? 6 : Math.abs(key) === 1 ? 3 : 1)
@@ -195,33 +196,25 @@ function phoneFrame(width: number, height: number): PhoneFrame {
   const bottoms: Record<number, Slot> = {}
   for (const key of [-3, -2, -1, 0, 1, 2, 3]) {
     const selected = key === 0
+    const widthFor = selected ? centerW : sideW
     tops[key] = {
       cx: xs[key] ?? 0,
-      y: topCenterY,
-      w: selected ? centerW : sideW,
-      h: selected ? topCenterH : topSideH,
+      y: topH / 2,
+      w: widthFor,
+      h: widthFor * topAspect,
       brightness: tone(key),
       z: depth(key),
     }
     bottoms[key] = {
       cx: xs[key] ?? 0,
-      y: bottomStart,
-      w: selected ? centerW : sideW,
-      h: selected ? bottomCenterH : bottomSideH,
+      y: bottomH / 2,
+      w: widthFor,
+      h: widthFor * bottomAspect,
       brightness: tone(key),
       z: depth(key),
     }
   }
-  return {
-    tops,
-    bottoms,
-    arrowTop: topCenterY,
-    arrowBottom: bottomStart + bottomCenterH / 2,
-    topSwipe: topStart,
-    topSwipeH: topBand,
-    bottomSwipe: bottomStart,
-    bottomSwipeH: bottomBand,
-  }
+  return { tops, bottoms, topRow: topH, bottomRow: bottomH }
 }
 
 function useWardrobeStage() {
@@ -387,20 +380,16 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
         className="wardrobe-shell"
         style={{
           width: frame ? hostW : CANVAS_WIDTH * scale,
-          height: frame ? hostH : CANVAS_HEIGHT * scale,
+          height: frame ? 'auto' : CANVAS_HEIGHT * scale,
         }}
       >
         <div
           className="wardrobe-canvas"
           style={
             {
-              transform: `scale(${scale})`,
-              '--arrow-top': frame ? `${frame.arrowTop}px` : undefined,
-              '--arrow-bottom': frame ? `${frame.arrowBottom}px` : undefined,
-              '--swipe-top': frame ? `${frame.topSwipe}px` : undefined,
-              '--swipe-top-h': frame ? `${frame.topSwipeH}px` : undefined,
-              '--swipe-bottom': frame ? `${frame.bottomSwipe}px` : undefined,
-              '--swipe-bottom-h': frame ? `${frame.bottomSwipeH}px` : undefined,
+              transform: frame ? 'none' : `scale(${scale})`,
+              '--top-row': frame ? `${frame.topRow}px` : undefined,
+              '--bottom-row': frame ? `${frame.bottomRow}px` : undefined,
             } as CSSProperties
           }
         >
@@ -416,6 +405,7 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
           carousel={tops}
           slots={frame?.tops ?? TOP_SLOTS}
           anchor="center"
+          fitImage={Boolean(frame)}
           reveal={topReveal}
           controls={controlsReveal}
           interactive={interactive}
@@ -429,7 +419,8 @@ export function Wardrobe({ enabled, reveal, exiting = false, onFinished }: Wardr
           items={BOTTOMS}
           carousel={bottoms}
           slots={frame?.bottoms ?? BOTTOM_SLOTS}
-          anchor="top"
+          anchor={frame ? 'center' : 'top'}
+          fitImage={Boolean(frame)}
           reveal={bottomReveal}
           controls={controlsReveal}
           interactive={interactive}
@@ -463,6 +454,7 @@ function GarmentRow({
   controls,
   interactive,
   compact,
+  fitImage = false,
 }: {
   rowRef: RefObject<HTMLDivElement | null>
   className: string
@@ -475,6 +467,7 @@ function GarmentRow({
   controls: number
   interactive: boolean
   compact: boolean
+  fitImage?: boolean
 }) {
   const pointerRef = useRef<{ id: number; x: number } | null>(null)
   const moveRef = useRef(carousel.move)
@@ -554,7 +547,7 @@ function GarmentRow({
               left: pos.cx + item.offsetX,
               top: pos.y + item.offsetY,
               width: pos.w * item.visualScale,
-              height: pos.h * item.visualScale,
+              height: (fitImage ? pos.w * item.ratio : pos.h) * item.visualScale,
               zIndex: pos.z,
               opacity: hiddenFar ? 0 : 1,
               filter: `brightness(${Math.round(pos.brightness * 100)}%)`,
