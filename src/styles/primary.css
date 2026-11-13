@@ -35,3 +35,9 @@ body.is-primary {
   padding: 0;
   border: 0;
 }
+
+.survey-plate {
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent;
+}
