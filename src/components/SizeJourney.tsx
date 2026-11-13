@@ -381,9 +381,9 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
           </section>
 
           <section
-            className={`journey-panel is-dark-copy${screen === 'yesResult' ? ' is-active' : ''}`}
-            aria-hidden={screen !== 'yesResult'}
-            inert={screen !== 'yesResult'}
+            className={`journey-panel is-dark-copy is-yes-result${screen === 'yesResult' ? ' is-active' : ''}`}
+            aria-hidden={screen !== 'yesResult' || phone}
+            inert={screen !== 'yesResult' || phone}
           >
             <div className="result-copy">
               <p>You chose YES. But should loving the clothes mean</p>
@@ -395,9 +395,9 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
           </section>
 
           <section
-            className={`journey-panel is-dark-copy${screen === 'noResult' ? ' is-active' : ''}`}
-            aria-hidden={screen !== 'noResult'}
-            inert={screen !== 'noResult'}
+            className={`journey-panel is-dark-copy is-no-result${screen === 'noResult' ? ' is-active' : ''}`}
+            aria-hidden={screen !== 'noResult' || phone}
+            inert={screen !== 'noResult' || phone}
           >
             <p className="no-copy">You chose yourself. ONE SIZE shouldn’t define your body.</p>
             <button type="button" className="enter-btn" onClick={onEnter}>
@@ -457,6 +457,27 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
               NO
             </button>
           </div>
+        </section>
+      ) : null}
+
+      {phone && screen === 'yesResult' ? (
+        <section className="result-phone" aria-label="You chose yes">
+          <div className="result-copy">
+            <p>You chose YES. But should loving the clothes mean</p>
+            <p>compromising your size?</p>
+          </div>
+          <button type="button" className="think-btn" onClick={resetQuestion}>
+            THINK AGAIN
+          </button>
+        </section>
+      ) : null}
+
+      {phone && screen === 'noResult' ? (
+        <section className="result-phone" aria-label="You chose yourself">
+          <p className="no-copy">You chose yourself. ONE SIZE shouldn’t define your body.</p>
+          <button type="button" className="enter-btn" onClick={onEnter}>
+            ENTER
+          </button>
         </section>
       ) : null}
 
