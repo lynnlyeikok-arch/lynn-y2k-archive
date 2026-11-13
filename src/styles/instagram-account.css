@@ -26,6 +26,11 @@ body.is-instagram {
   border: 0;
 }
 
+.instagram-stage {
+  position: relative;
+  width: 100%;
+}
+
 .instagram-plate {
   display: block;
   width: 100%;
@@ -34,4 +39,70 @@ body.is-instagram {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.instagram-follow-mask,
+.instagram-follow {
+  position: absolute;
+  left: 45.6055%;
+  top: 59.375%;
+  width: 39.1601%;
+  height: 8.6806%;
+}
+
+.instagram-follow-mask {
+  background: #ffdee8;
+  pointer-events: none;
+}
+
+.instagram-follow {
+  z-index: 1;
+  display: block;
+  color: transparent;
+  cursor: pointer;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.instagram-follow-art {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/instagram-account.svg');
+  background-repeat: no-repeat;
+  background-size: calc(100% / 0.391601) calc(100% / 0.086806);
+  background-position: 74.9598% 65.0081%;
+  pointer-events: none;
+}
+
+.instagram-follow-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.instagram-follow:hover {
+  transform: scale(1.03);
+}
+
+.instagram-follow:active {
+  transform: scale(0.98) translateY(2px);
+  transition-duration: 0.08s;
+}
+
+.instagram-follow:focus-visible {
+  outline: 2px solid #2a1c22;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instagram-follow {
+    transition: none;
+  }
 }
