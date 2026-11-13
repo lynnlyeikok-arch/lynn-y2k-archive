@@ -25,6 +25,7 @@ type Garment = {
   offsetX: number
   offsetY: number
   ratio: number
+  phoneScale?: number
 }
 
 const CANVAS_WIDTH = 1366
@@ -51,10 +52,10 @@ const BOTTOMS: Garment[] = [
   { src: '/images/bottoms/bottom-01.png', label: 'Bottom 01', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
   { src: '/images/bottoms/bottom-02.png', label: 'Bottom 02', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 172 / 222 },
   { src: '/images/bottoms/bottom-03.png', label: 'Bottom 03', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 454 / 341 },
-  { src: '/images/bottoms/bottom-04.png', label: 'Bottom 04', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 386 / 290 },
-  { src: '/images/bottoms/bottom-05.png', label: 'Bottom 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
+  { src: '/images/bottoms/bottom-04.png', label: 'Bottom 04', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 386 / 290, phoneScale: 1.065 },
+  { src: '/images/bottoms/bottom-05.png', label: 'Bottom 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1, phoneScale: 0.82 },
   { src: '/images/bottoms/bottom-06.png', label: 'Bottom 06', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 229 / 258 },
-  { src: '/images/bottoms/bottom-07.png', label: 'Bottom 07', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 489 / 382 },
+  { src: '/images/bottoms/bottom-07.png', label: 'Bottom 07', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 489 / 382, phoneScale: 1.14 },
   { src: '/images/bottoms/bottom-08.png', label: 'Bottom 08', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
   { src: '/images/bottoms/bottom-09.png', label: 'Bottom 09', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
   { src: '/images/bottoms/bottom-10.png', label: 'Bottom 10', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
@@ -164,7 +165,7 @@ function phoneFrame(width: number, height: number): PhoneFrame {
   const doneH = 48
   const chrome = titleH + rowGap + doneGap + doneH
   const topAspect = Math.max(...TOPS.map((item) => item.ratio))
-  const bottomAspect = Math.max(...BOTTOMS.map((item) => item.ratio))
+  const bottomAspect = Math.max(...BOTTOMS.map((item) => item.ratio * (item.phoneScale ?? 1)))
   let innerW = Math.max(120, width - arrow * 2)
   let centerW = innerW * 0.4
   let sideW = innerW * 0.3
@@ -539,6 +540,7 @@ function GarmentRow({
         if (!item) return null
         const pos = slotAt(slots, slot)
         const hiddenFar = compact && Math.abs(slot) > 1
+        const scale = item.visualScale * (fitImage ? (item.phoneScale ?? 1) : 1)
         return (
           <div
             key={item.src}
@@ -546,8 +548,8 @@ function GarmentRow({
             style={{
               left: pos.cx + item.offsetX,
               top: pos.y + item.offsetY,
-              width: pos.w * item.visualScale,
-              height: (fitImage ? pos.w * item.ratio : pos.h) * item.visualScale,
+              width: pos.w * scale,
+              height: (fitImage ? pos.w * item.ratio : pos.h) * scale,
               zIndex: pos.z,
               opacity: hiddenFar ? 0 : 1,
               filter: `brightness(${Math.round(pos.brightness * 100)}%)`,
