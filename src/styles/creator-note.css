@@ -52,7 +52,7 @@ body.is-creator-note {
 
 @media (max-width: 700px) {
   .creator-note-page {
-    padding: 0 16px;
+    padding: 64px 0 16px;
   }
 
   .creator-note-back {
@@ -61,6 +61,8 @@ body.is-creator-note {
   }
 
   .creator-note-art {
-    width: calc(100vw - 32px);
+    flex-shrink: 0;
+    width: calc((100vw - 32px) / 0.7822);
+    max-width: none;
   }
 }

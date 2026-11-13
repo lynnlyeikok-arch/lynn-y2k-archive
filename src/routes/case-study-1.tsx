@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { IntroHeader } from '../components/IntroHeader'
 
@@ -7,8 +7,6 @@ export const Route = createFileRoute('/case-study-1')({
 })
 
 function CaseStudyOnePage() {
-  const [fullSize, setFullSize] = useState(false)
-
   useLayoutEffect(() => {
     const html = document.documentElement
     const body = document.body
@@ -18,15 +16,10 @@ function CaseStudyOnePage() {
     html.scrollTop = 0
     body.scrollTop = 0
     return () => {
-      html.classList.remove('is-case-study', 'is-case-study-full')
-      body.classList.remove('is-case-study', 'is-case-study-full')
+      html.classList.remove('is-case-study')
+      body.classList.remove('is-case-study')
     }
   }, [])
-
-  useLayoutEffect(() => {
-    document.documentElement.classList.toggle('is-case-study-full', fullSize)
-    document.body.classList.toggle('is-case-study-full', fullSize)
-  }, [fullSize])
 
   return (
     <main className="case-study-page">
@@ -50,13 +43,6 @@ function CaseStudyOnePage() {
           draggable={false}
         />
       </article>
-      <button
-        type="button"
-        className="case-study-zoom"
-        onClick={() => setFullSize((current) => !current)}
-      >
-        {fullSize ? 'FIT WIDTH' : 'FULL SIZE'}
-      </button>
     </main>
   )
 }

@@ -383,7 +383,8 @@ html.is-intro .intro-header-svg {
   z-index: 9999;
   box-sizing: border-box;
   width: 100%;
-  height: auto;
+  height: calc(100vw * 58 / 1024.5);
+  max-height: calc(100vw * 58 / 1024.5);
   aspect-ratio: 1024.5 / 58;
   overflow: hidden;
   margin: 0;
@@ -397,6 +398,8 @@ html.is-intro .intro-header-svg {
 }
 
 .intro-header-svg {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   max-width: none;
