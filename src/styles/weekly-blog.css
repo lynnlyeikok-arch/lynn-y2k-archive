@@ -42,16 +42,16 @@ body.is-week-02 {
   z-index: 1;
   width: min(1080px, 100%);
   max-width: 100%;
-  aspect-ratio: 1024.5 / var(--visible);
+  aspect-ratio: 1 / var(--art-view);
   overflow: hidden;
 }
 
 .weekly-blog-art {
   position: absolute;
   top: 0;
-  left: 0;
+  left: calc(100% * var(--art-shift));
   display: block;
-  width: 100%;
+  width: calc(100% * var(--art-scale));
   max-width: none;
   height: auto;
   margin: 0;
