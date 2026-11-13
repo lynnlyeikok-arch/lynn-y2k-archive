@@ -9,7 +9,7 @@ body.is-case-study {
 .case-study-page {
   width: 100%;
   margin: 0;
-  padding: calc(100vw * 58 / 1024.5) 0 72px;
+  padding: calc(100vw * 58 / 1024.5) 0 0;
   background: #ffffff;
 }
 

@@ -9,7 +9,7 @@ body.is-chapter {
 .chapter-page {
   width: 100%;
   margin: 0;
-  padding: calc(100% * 58 / 1024.5 - 3px) 0 72px;
+  padding: calc(100% * 58 / 1024.5 - 3px) 0 0;
   background: #f4bbc9;
   line-height: 0;
 }
