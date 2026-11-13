@@ -1,5 +1,6 @@
 html.is-intro,
 body.is-intro {
+  --intro-unit: calc(100vw / 1024.5);
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
@@ -7,7 +8,11 @@ body.is-intro {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #f4bbc9;
+  background-color: #ffb8c9;
+  background-image: url('/images/intro/polka-tile.png');
+  background-repeat: repeat;
+  background-size: calc(var(--intro-unit) * 85.599316868) calc(var(--intro-unit) * 85.599316868);
+  background-position: calc(var(--intro-unit) * 495.291645) calc(var(--intro-unit) * 1167.96576);
 }
 
 html.is-intro *,
@@ -28,7 +33,7 @@ html.is-intro *::after {
   outline: none;
   font-size: 0;
   line-height: 0;
-  background: #f4bbc9;
+  background: transparent;
 }
 
 html.is-intro .intro-header {
@@ -368,6 +373,7 @@ html.is-intro .intro-header-svg {
   outline: none;
   vertical-align: top;
   user-select: none;
+  clip-path: inset(0 0 1px 0);
 }
 
 .intro-header {
@@ -394,7 +400,7 @@ html.is-intro .intro-header-svg {
   display: block;
   width: 100%;
   max-width: none;
-  height: auto;
+  height: 100%;
   margin: 0;
   padding: 0;
   border: 0;
@@ -402,8 +408,8 @@ html.is-intro .intro-header-svg {
   opacity: 0.87;
   pointer-events: none;
   user-select: none;
-  vertical-align: top;
-  transform: translateY(calc(-269 / 576 * 100%));
+  object-fit: cover;
+  object-position: center 51.9305019305%;
 }
 
 .intro-header-nav {
