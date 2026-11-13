@@ -37,13 +37,13 @@ const SWIPE_PX = 48
 
 const TOPS: Garment[] = [
   { src: '/images/tops/top-01.png', label: 'Top 01', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 267 / 246 },
-  { src: '/images/tops/top-02.png', label: 'Top 02', visualScale: 1, offsetX: 0, offsetY: 4, ratio: 271 / 217 },
+  { src: '/images/tops/top-02.png', label: 'Top 02', visualScale: 1, offsetX: 0, offsetY: 4, ratio: 271 / 217, phoneScale: 0.865 },
   { src: '/images/tops/top-03.png', label: 'Top 03', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 283 / 298 },
   { src: '/images/tops/top-04.png', label: 'Top 04', visualScale: 1, offsetX: 0, offsetY: 2, ratio: 1 },
-  { src: '/images/tops/top-05.png', label: 'Top 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 260 / 195 },
+  { src: '/images/tops/top-05.png', label: 'Top 05', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 260 / 195, phoneScale: 0.81 },
   { src: '/images/tops/top-06.png', label: 'Top 06', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
   { src: '/images/tops/top-07.png', label: 'Top 07', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
-  { src: '/images/tops/top-08.png', label: 'Top 08', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 360 / 331 },
+  { src: '/images/tops/top-08.png', label: 'Top 08', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 360 / 331, phoneScale: 0.935 },
   { src: '/images/tops/top-09.png', label: 'Top 09', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 437 / 350 },
   { src: '/images/tops/top-10.png', label: 'Top 10', visualScale: 1, offsetX: 0, offsetY: 0, ratio: 1 },
 ]
