@@ -314,6 +314,105 @@
   letter-spacing: 0.06em;
 }
 
+.size-journey.is-phone .journey-panel.is-size,
+.size-journey.is-phone .journey-panel.is-question {
+  visibility: hidden;
+}
+
+.size-phone {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  box-sizing: border-box;
+  padding: 24px 16px;
+}
+
+.size-phone .size-title {
+  position: static;
+  width: 100%;
+  font-size: 36px;
+  line-height: 1.15;
+}
+
+.size-phone .size-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.size-phone .size-btn {
+  position: static;
+  flex: 1 1 0;
+  max-width: 68px;
+  height: 64px;
+  font-size: 28px;
+  border-radius: 18px;
+}
+
+.question-phone {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  box-sizing: border-box;
+  padding: 24px 8px;
+  pointer-events: none;
+}
+
+.question-phone .question-copy,
+.question-phone .choice-btn {
+  pointer-events: auto;
+}
+
+.question-phone .question-copy {
+  position: static;
+  width: 100%;
+}
+
+.question-phone .question-copy .question-lead {
+  margin-bottom: 10px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.question-phone .question-copy p {
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.question-phone .question-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.question-phone .choice-btn,
+.question-yes-spacer {
+  position: static;
+  width: 112px;
+  height: 64px;
+  font-size: 28px;
+}
+
+.question-phone .choice-btn.is-yes.is-free {
+  transform: none;
+}
+
+.size-journey.is-phone .question-chase.is-active {
+  z-index: 5;
+}
+
 @media (max-width: 800px) {
   .size-btn {
     font-size: 28px;

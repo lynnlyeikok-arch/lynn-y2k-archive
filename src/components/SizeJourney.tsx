@@ -37,6 +37,7 @@ const SIZE_BUTTONS = [
 const YES_HOME = { left: 505, top: 481 * SY }
 const NO_HOME = { left: 694, top: 481 * SY }
 const CHOICE_SIZE = { width: 167, height: 63 }
+const PHONE_CHOICE = { width: 112, height: 64, fontSize: 28 }
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -46,25 +47,30 @@ function useCanvasScale(width: number, height: number) {
   const hostRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
   const [view, setView] = useState({ w: width, h: height })
+  const [phone, setPhone] = useState(false)
 
   useEffect(() => {
     const host = hostRef.current
     if (!host) return
+    const media = window.matchMedia('(max-width: 700px)')
     const update = () => {
+      setPhone(media.matches)
       setScale(Math.min(host.clientWidth / width, host.clientHeight / height))
       setView({ w: host.clientWidth, h: host.clientHeight })
     }
     update()
     const observer = new ResizeObserver(update)
     observer.observe(host)
+    media.addEventListener('change', update)
     window.addEventListener('resize', update)
     return () => {
       observer.disconnect()
+      media.removeEventListener('change', update)
       window.removeEventListener('resize', update)
     }
   }, [width, height])
 
-  return { hostRef, scale, view }
+  return { hostRef, scale, view, phone }
 }
 
 function mapCanvasPoint(point: Point, scale: number, view: { w: number; h: number }): Point {
@@ -78,7 +84,7 @@ function mapCanvasPoint(point: Point, scale: number, view: { w: number; h: numbe
 
 export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
   const navigate = useNavigate()
-  const { hostRef, scale, view } = useCanvasScale(CANVAS_WIDTH, CANVAS_HEIGHT)
+  const { hostRef, scale, view, phone } = useCanvasScale(CANVAS_WIDTH, CANVAS_HEIGHT)
   const [screen, setScreen] = useState<InteractionScreen>('size')
   const [selectedSize, setSelectedSize] = useState<SizeId | null>(null)
   const [escapeCount, setEscapeCount] = useState(0)
@@ -198,6 +204,8 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
     const nextNoScale = noScaleForCount(nextCount, maximum)
     const questionBox = questionRef.current?.getBoundingClientRect()
     const hostBox = hostRef.current?.getBoundingClientRect()
+    const yesBox = yesBtnRef.current?.getBoundingClientRect()
+    const noBoxRect = noBtnRef.current?.getBoundingClientRect()
     const question = questionBox && hostBox
       ? {
           left: questionBox.left - hostBox.left,
@@ -211,19 +219,32 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
           width: 646 * scale,
           height: 220 * scale,
         }
-    const noBox = scaledBox(noHome.left, noHome.top, btnW, btnH, nextNoScale)
+    const liveYes = phone && yesBox && hostBox
+      ? { left: yesBox.left - hostBox.left, top: yesBox.top - hostBox.top }
+      : { left: yesViewport.left, top: yesViewport.top }
+    const liveW = phone && yesBox ? yesBox.width : btnW
+    const liveH = phone && yesBox ? yesBox.height : btnH
+    const grown = nextNoScale / Math.max(noScale, 1)
+    const noBox = phone && noBoxRect && hostBox
+      ? {
+          left: noBoxRect.left - hostBox.left - (noBoxRect.width * (grown - 1)) / 2,
+          top: noBoxRect.top - hostBox.top - (noBoxRect.height * (grown - 1)) / 2,
+          width: noBoxRect.width * grown,
+          height: noBoxRect.height * grown,
+        }
+      : scaledBox(noHome.left, noHome.top, btnW, btnH, nextNoScale)
     const previous = {
-      left: yesViewport.left,
-      top: yesViewport.top,
-      width: btnW,
-      height: btnH,
+      left: liveYes.left,
+      top: liveYes.top,
+      width: liveW,
+      height: liveH,
     }
     const picked = pickYesPosition({
       viewW: view.w,
       viewH: view.h,
-      btnW,
-      btnH,
-      current: { left: yesViewport.left, top: yesViewport.top },
+      btnW: liveW,
+      btnH: liveH,
+      current: liveYes,
       pointer: pointerRef.current,
       exclusions: [question, noBox, previous],
       lastZone: lastZone.current,
@@ -311,7 +332,7 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
   return (
     <div
       ref={hostRef}
-      className="size-journey"
+      className={`size-journey${phone ? ' is-phone' : ''}`}
       aria-live="polite"
       onPointerMove={onQuestionPointerMove}
     >
@@ -322,9 +343,9 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
       >
         <div className="size-journey-canvas" style={{ transform: `scale(${scale})` }}>
           <section
-            className={`journey-panel${screen === 'size' ? ' is-active' : ''}`}
-            aria-hidden={screen !== 'size'}
-            inert={screen !== 'size'}
+            className={`journey-panel is-size${screen === 'size' ? ' is-active' : ''}`}
+            aria-hidden={screen !== 'size' || phone}
+            inert={screen !== 'size' || phone}
           >
             <h2 className="size-title">CHOOSE YOUR SIZE</h2>
             <div className="size-row">
@@ -347,11 +368,11 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
           </section>
 
           <section
-            className={`journey-panel${screen === 'question' ? ' is-active' : ''}`}
-            aria-hidden={screen !== 'question'}
-            inert={screen !== 'question'}
+            className={`journey-panel is-question${screen === 'question' ? ' is-active' : ''}`}
+            aria-hidden={screen !== 'question' || phone}
+            inert={screen !== 'question' || phone}
           >
-            <div className="question-copy" ref={questionRef}>
+            <div className="question-copy" ref={phone ? undefined : questionRef}>
               <p>ONE STANDARD SIZE ONLY</p>
               <p>You love it. But it doesn’t fit.</p>
               <p>Would you compromise your size</p>
@@ -386,44 +407,101 @@ export function SizeJourney({ onBackToWardrobe }: SizeJourneyProps) {
         </div>
       </div>
 
+      {phone && screen === 'size' ? (
+        <section className="size-phone" aria-label="Choose your size">
+          <h2 className="size-title">CHOOSE YOUR SIZE</h2>
+          <div className="size-row">
+            {SIZE_BUTTONS.map((button) => (
+              <button
+                key={button.id}
+                type="button"
+                className={`size-btn${selectedSize === button.id ? ' is-selected' : ''}`}
+                onClick={() => onPickSize(button.id)}
+              >
+                {button.id}
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {phone && screen === 'question' ? (
+        <section className="question-phone" aria-label="One standard size only">
+          <div className="question-copy" ref={questionRef}>
+            <p className="question-lead">ONE STANDARD SIZE ONLY</p>
+            <p>You love it. But it doesn’t fit.</p>
+            <p>Would you compromise your size</p>
+            <p>for the clothes?</p>
+          </div>
+          <div className="question-actions">
+            {escapeCount === 0 ? (
+              <button
+                ref={yesBtnRef}
+                type="button"
+                className="choice-btn is-yes is-free"
+                onPointerDown={onYesPointerDown}
+                onClick={onYesClick}
+              >
+                YES
+              </button>
+            ) : (
+              <span className="question-yes-spacer" aria-hidden="true" />
+            )}
+            <button
+              ref={noBtnRef}
+              type="button"
+              className={`choice-btn is-no is-free${noGrowing && !reduced ? ' is-growing' : ''}`}
+              style={{ transform: `scale(${noScale})` }}
+              onClick={() => goTo('noResult')}
+            >
+              NO
+            </button>
+          </div>
+        </section>
+      ) : null}
+
       <div
         className={`question-chase${screen === 'question' ? ' is-active' : ''}`}
-        aria-hidden={screen !== 'question'}
-        inert={screen !== 'question'}
+        aria-hidden={screen !== 'question' || (phone && escapeCount === 0)}
+        inert={screen !== 'question' || (phone && escapeCount === 0)}
       >
-        <button
-          ref={yesBtnRef}
-          type="button"
-          className={`choice-btn is-yes is-free${yesHopping && !reduced ? ' is-hopping' : ''}`}
-          style={{
-            left: yesViewport.left,
-            top: yesViewport.top,
-            width: btnW,
-            height: btnH,
-            fontSize: 33 * scale,
-            ['--yes-rot' as string]: `${yesRotate}deg`,
-          }}
-          onPointerDown={onYesPointerDown}
-          onClick={onYesClick}
-        >
-          YES
-        </button>
-        <button
-          ref={noBtnRef}
-          type="button"
-          className={`choice-btn is-no is-free${noGrowing && !reduced ? ' is-growing' : ''}`}
-          style={{
-            left: noHome.left,
-            top: noTop,
-            width: btnW,
-            height: btnH,
-            fontSize: 33 * scale,
-            transform: `scale(${noScale})`,
-          }}
-          onClick={() => goTo('noResult')}
-        >
-          NO
-        </button>
+        {phone && escapeCount === 0 ? null : (
+          <button
+            ref={yesBtnRef}
+            type="button"
+            className={`choice-btn is-yes is-free${yesHopping && !reduced ? ' is-hopping' : ''}`}
+            style={{
+              left: yesViewport.left,
+              top: yesViewport.top,
+              width: phone ? PHONE_CHOICE.width : btnW,
+              height: phone ? PHONE_CHOICE.height : btnH,
+              fontSize: phone ? PHONE_CHOICE.fontSize : 33 * scale,
+              ['--yes-rot' as string]: `${yesRotate}deg`,
+            }}
+            onPointerDown={onYesPointerDown}
+            onClick={onYesClick}
+          >
+            YES
+          </button>
+        )}
+        {phone ? null : (
+          <button
+            ref={noBtnRef}
+            type="button"
+            className={`choice-btn is-no is-free${noGrowing && !reduced ? ' is-growing' : ''}`}
+            style={{
+              left: noHome.left,
+              top: noTop,
+              width: btnW,
+              height: btnH,
+              fontSize: 33 * scale,
+              transform: `scale(${noScale})`,
+            }}
+            onClick={() => goTo('noResult')}
+          >
+            NO
+          </button>
+        )}
         <span className="sr-only">
           {yesCatchable
             ? 'YES can now be selected.'
